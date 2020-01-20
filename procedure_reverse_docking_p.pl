@@ -69,7 +69,7 @@ my $prep_dpf4="$script/pythonsh $script/prepare_dpf42.py -i reference.dpf";
 open(fp,"<$par{coord_file}") or die();
 my %coord;
 while(my $line=<fp>){
-    next if ($line=~/\sn\/a/ or $line=~/\snot_conserved/);
+    next if ($line=~/^#/); #skip comments
     my @p=split /\s+/, $line;
     my($name,$x,$y,$z)=($p[0], $p[2], $p[3], $p[4]);
     $coord{$name}="$x $y $z" if($name);
@@ -134,7 +134,9 @@ foreach my $pdb (sort keys %coord){
     $cmd="sed -i 's/\#/\ \#/g' $receptor_name$ligand_name.dpf"; #to compensate for a prepare_dpf4 bug
     my $error=system ($cmd); if ($error) { die "failed: $!" };
 ##########       autodock4 [fork]  ##########
-    $cmd="autodock4 -p $receptor_name$ligand_name.dpf -l $receptor_name$ligand_name.dlg";
+	#$multi{$receptor_name}=0 if (!defined $multi{$receptor_name});
+	#$multi{$receptor_name}+=1 if ($multi{$receptor_name});
+    $cmd="autodock4 -p $receptor_name$ligand_name.dpf -l $receptor_name$ligand_name.$multi{$receptor_name}.dlg";
     my $pid=fork();
     if ($pid == -1) {
        die "failed: $!";
