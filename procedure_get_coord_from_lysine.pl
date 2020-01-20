@@ -23,9 +23,12 @@ while(my $line=<fp>){
  
  open (pdb,"<$pdb_dir/$model") or die();
  while(my $pdb_line=<pdb>){
-    $coord{$model}="$1" if ($pdb_line=~/^ATOM.*NZ\s.*[A-Z]{3}\s[\sA]\s*$K_resn\s+(\S+\s+\S+\s+\S+\s+)/);
+    if ($pdb_line=~/^ATOM.*NZ\s.*[A-Z]{3}\s[\s\S]\s*$K_resn\s+(\S+\s+\S+\s+\S+\s+)/){
+        $coord{$model}="$1";
+        printf "$model $K_resn $coord{$model}\n";
+    }
  }
-  printf "$model $K_resn $coord{$model}\n";
+  
  close(pdb);
  
 }
