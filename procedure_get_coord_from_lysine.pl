@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 #Find coordinates for PLP-bound lysine in a PDB file
-#Read Orf_Pred from identificatione_genomi_hmmsearch.pl
+#Read Orf_Pred from identificazione_genomi_hmmsearch.pl (input file from pdb2fasta)
 use strict;
 
 my $usage="$0 Orf_Pred_file pdb_file_directory_path\n    extract coordinates of catalytic lysine\n";
