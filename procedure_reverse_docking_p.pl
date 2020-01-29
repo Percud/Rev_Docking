@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 # Docks a ligand into several pdb structures
-# with autodock
+# with autodock - 
 
 use strict;
 use File::Basename;
