@@ -23,7 +23,7 @@ foreach my $line(<T>){
       open(S,"<$name") or die($!);
       my @F=<S>;
       my $f=join("\n",@F);
-      my $GMQE=$1 if ($f=~/GMQE\s+(\S+)/m);
+      my $GMQE=$1 if ($f=~/GMQE|QSPRD\s+(\S+)/m);
       my $QMN4=$1 if ($f=~/QMN4\s+(\S+)/m);
       my $OSTAT=$1 if ($f=~/OSTAT\s+(\S+)/m);
       $smodel="$GMQE\t$QMN4\t$OSTAT";
