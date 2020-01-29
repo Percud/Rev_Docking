@@ -22,13 +22,15 @@ while(my $line=<fp>){
  $model="$model.pdb";
  
  open (pdb,"<$pdb_dir/$model") or die();
+ my $found=0;
  while(my $pdb_line=<pdb>){
     if ($pdb_line=~/^ATOM.*NZ\s.*[A-Z]{3}\s[\s\S]\s*$K_resn\s+(\S+\s+\S+\s+\S+\s+)/){
         $coord{$model}="$1";
         printf "$model $K_resn $coord{$model}\n";
+        $found=1;
     }
  }
-  
+ printf "#Coordinates not found for $model\n" if (!$found); 
  close(pdb);
  
 }
