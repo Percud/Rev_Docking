@@ -72,7 +72,7 @@ while(my $line=<fp>){
     next if ($line=~/^#/); #skip comments
     my @p=split /\s+/, $line;
     my($name,$x,$y,$z)=($p[0], $p[2], $p[3], $p[4]);
-    $coord{$name}="$x $y $z" if($name);
+    $coord{$name}=["$x $y $z"] if($name);
 }
 
 my $cmd;
@@ -105,46 +105,46 @@ foreach my $pdb (sort keys %coord){
     $cmd="sed -i \"/.*HETATM.*/d\" *.pdbqt";
 
 ##########     prepare gpf   ##########
-    $cmd="cp $par{gpf_par} ./reference.gpf";
-    if (-e $par{gpf_par}){
-      print outlog "\n$cmd\n";
-       my $error=system ($cmd); if ($error) { die "Copy failed: $!" };
-      }
-    open(fp,">>reference.gpf") or die();
-    printf fp "\ngridcenter %s\n", $coord{$pdb};
-    close fp;
-    $cmd="$prep_gpf4 -r $receptor -l $ligand -o $receptor_name$ligand_name.gpf";
-    print outlog "\n$cmd\n";
-     my $error=system ($cmd); if ($error) { die "failed: $!" };        
-##########       autogrid4   ##########
-    $cmd="autogrid4 -p $receptor_name$ligand_name.gpf -l $receptor_name$ligand_name.glg";
-    print outlog "\n$cmd\n";
-     my $error=system ($cmd); if ($error) { die "failed: $!" };  
-##########     prepare dpf   ##########
-    $cmd="cp $par{dpf_par} ./reference.dpf";
-    if (-e $par{dpf_par}){
-      print outlog "\n$cmd\n";
-       my $error=system ($cmd); if ($error) { die "Copy failed: $!" };
-      }
-    open(fp,">>reference.dpf") or die();
-    close fp;
-    $cmd="$prep_dpf4 -r $receptor -l $ligand -o $receptor_name$ligand_name.dpf";
-    print outlog "\n$cmd\n";
-     my $error=system ($cmd); if ($error) { die "failed: $!" };
-    $cmd="sed -i 's/\#/\ \#/g' $receptor_name$ligand_name.dpf"; #to compensate for a prepare_dpf4 bug
-    my $error=system ($cmd); if ($error) { die "failed: $!" };
-##########       autodock4 [fork]  ##########
-	#$multi{$receptor_name}=0 if (!defined $multi{$receptor_name});
-	#$multi{$receptor_name}+=1 if ($multi{$receptor_name});
-    $cmd="autodock4 -p $receptor_name$ligand_name.dpf -l $receptor_name$ligand_name.$multi{$receptor_name}.dlg";
-    my $pid=fork();
-    if ($pid == -1) {
-       die "failed: $!";
-   } elsif ($pid == 0) {
-      exec $cmd;
-   }
-    print outlog "\n$cmd\n";
-     
+    for my $i (0 .. $#{ $coord{$pdb} }){
+    	$receptor_name=sprintf("%s.%s."),$receptor_name,$i;
+	    $cmd="cp $par{gpf_par} ./reference.gpf";
+	    if (-e $par{gpf_par}){
+	      print outlog "\n$cmd\n";
+	       my $error=system ($cmd); if ($error) { die "Copy failed: $!" };
+	      }
+	    open(fp,">>reference.gpf") or die();
+	    printf fp "\ngridcenter %s\n", $coord{$pdb};
+	    close fp;
+	    $cmd="$prep_gpf4 -r $receptor -l $ligand -o $receptor_name$ligand_name.gpf";
+	    print outlog "\n$cmd\n";
+	     my $error=system ($cmd); if ($error) { die "failed: $!" };        
+	##########       autogrid4   ##########
+	    $cmd="autogrid4 -p $receptor_name$ligand_name.gpf -l $receptor_name$ligand_name.glg";
+	    print outlog "\n$cmd\n";
+	     my $error=system ($cmd); if ($error) { die "failed: $!" };  
+	##########     prepare dpf   ##########
+	    $cmd="cp $par{dpf_par} ./reference.dpf";
+	    if (-e $par{dpf_par}){
+	      print outlog "\n$cmd\n";
+	       my $error=system ($cmd); if ($error) { die "Copy failed: $!" };
+	      }
+	    open(fp,">>reference.dpf") or die();
+	    close fp;
+	    $cmd="$prep_dpf4 -r $receptor -l $ligand -o $receptor_name$ligand_name.dpf";
+	    print outlog "\n$cmd\n";
+	     my $error=system ($cmd); if ($error) { die "failed: $!" };
+	    $cmd="sed -i 's/\#/\ \#/g' $receptor_name$ligand_name.dpf"; #to compensate for a prepare_dpf4 bug
+	    my $error=system ($cmd); if ($error) { die "failed: $!" };
+	##########       autodock4 [fork]  ##########
+	    $cmd="autodock4 -p $receptor_name$ligand_name.dpf -l $receptor_name$ligand_name.dlg";
+	    my $pid=fork();
+	    if ($pid == -1) {
+	       die "failed: $!";
+	   } elsif ($pid == 0) {
+	      exec $cmd;
+	   }
+	    print outlog "\n$cmd\n";
+     } #end for my $i (0 .. $#{ $coord{$pdb} })
      
 #######################################
 }
@@ -153,6 +153,3 @@ my ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst) = localtime(time);
 printf outlog "\n\ncommand: %s %s\n",$0, join(' ',@ARGV);  
 printf outlog "job ended at %02d:%02d:%02d on %02d %02d %04d\n\n", $hour,$min,$sec, $mday, $mon, $year+1900;  
 close outlog;
-
-
-
