@@ -18,7 +18,7 @@ foreach my $line(<T>){
     my ($name,$smodel);
     my($from,$to,$template,$provider)=($1,$2,$3,$4) if (/from=(\d+).to=(\d+).template=(\S+).provider=(\S+)/);
     $name=sprintf "%s_%s_%s_%s_%s.pdb", $uniprot,$from,$to,$template,$provider;
-    #system ("wget --content-disposition \"$_\" -O $name\n");
+    system ("wget --content-disposition \"$_\" -O $name\n");
     if ($provider eq "swissmodel"){
       open(S,"<$name") or die($!);
       my @F=<S>;
@@ -27,8 +27,8 @@ foreach my $line(<T>){
       my $QMN4=$1 if ($f=~/QMN4\s+(\S+)/m);
       my $OSTAT=$1 if ($f=~/OSTAT\s+(\S+)/m);
       $smodel="$GMQE\t$QMN4\t$OSTAT";
-      }
-    $smodel="NA\t\NA\t\NA" if (!$smodel);
+      }      
+    $smodel="" if (!$smodel);
     printf "$uniprot\t$acc\t$gene\t$desc\t$name\t$smodel\n";
     }
  }
