@@ -27,6 +27,6 @@ can be obtained with the following utility:
 ```
   The command will extract coordinates from the pdb files stored in the Huma/pdb directory.
 
-  Pdb_id, chain, and residue number are specified in the input file; the -a option specifies the particular atom (defauld CA).
+  Pdb_id, chain, and residue number are specified in the input file; the -a option specifies the particular atom (default CA).
 
   See  [Human_Orf_pred.resn](https://github.com/Percud/Rev_Docking/edit/master/Human/Human_Orf_pred.resn) for input file specs
