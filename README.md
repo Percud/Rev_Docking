@@ -22,4 +22,5 @@ can be obtained with the following utility:
 ```
 Utility_scripts/procedure_get_coord_from_resn.pl -a NZ Human/Human_Orf_pred.resn Human/pdb
 ```
-See 
+The command will extract coordinates from the pdb files stored in the Huma/pdb directory
+See  [Human_Orf_pred.resn](https://github.com/Percud/Rev_Docking/edit/master/Human/Human_Orf_pred.resn) for input file specs
