@@ -11,12 +11,14 @@ AutoDock >=4.2.6
 Perl, Phyton, linux
 
 ## Example
-Screen a library of structures with a particular substrate
+Screens a library of enzyme active sites with a particular substrate
 ```
 ./procedure_reverse_docking_p.pl rd_conf_HTML_PLP.txt
 ```
 
-A lists of pdb entries with x y z coordinates to center the grid 
+See  [rd_conf_HTML_PLP.txt](https://github.com/Percud/Rev_Docking/edit/master/rd_conf_HTML_PLP.txt) for required files
+
+A list of pdb entries with x y z coordinates to center the grid 
 can be obtained with the following utility:
 
 ```
