@@ -70,9 +70,9 @@ open(fp,"<$par{coord_file}") or die();
 my %coord;
 while(my $line=<fp>){
     next if ($line=~/^#/); #skip comments
-    my @p=split /\s+/, $line;
-    my($name,$x,$y,$z)=($p[0], $p[2], $p[3], $p[4]);
-    $coord{$name}=["$x $y $z"] if($name);
+ 
+    my($name,$x,$y,$z)=split /\s+/, $line;
+    push @{$coord{$name}}, "$x $y $z" if($name);
 }
 
 my $cmd;
@@ -100,26 +100,26 @@ foreach my $pdb (sort keys %coord){
     printf stderr "\n\n#### processing: %s ####\n",$receptor;
     next if (!-e  "$par{receptor_dir}/$pdb"); 
     $cmd="$prep_receptor -r $par{receptor_dir}/$pdb -o $receptor -e";
-     print outlog "\n$cmd\n";
-     my $error=system ($cmd); if ($error) { die "failed: $!" };
-    $cmd="sed -i \"/.*HETATM.*/d\" *.pdbqt";
+    print outlog "\n$cmd\n";
+    my $error=system ($cmd); if ($error) { die "failed: $!" };
+    #$cmd="sed -i \"/.*HETATM.*/d\" *.pdbqt"; #check if needed
 
-##########     prepare gpf   ##########
+##########   prepare gpf   ##########
     for my $i (0 .. $#{ $coord{$pdb} }){
-    	$receptor_name=sprintf("%s.%s."),$receptor_name,$i;
+	    my $receptor_name_chain=sprintf "%s.%s.",$receptor_name,$i;
 	    $cmd="cp $par{gpf_par} ./reference.gpf";
 	    if (-e $par{gpf_par}){
 	      print outlog "\n$cmd\n";
 	       my $error=system ($cmd); if ($error) { die "Copy failed: $!" };
 	      }
 	    open(fp,">>reference.gpf") or die();
-	    printf fp "\ngridcenter %s\n", $coord{$pdb};
+	    printf fp "\ngridcenter %s\n", $coord{$pdb}[$i];
 	    close fp;
-	    $cmd="$prep_gpf4 -r $receptor -l $ligand -o $receptor_name$ligand_name.gpf";
+	    $cmd="$prep_gpf4 -r $receptor -l $ligand -o $receptor_name_chain$ligand_name.gpf";
 	    print outlog "\n$cmd\n";
-	     my $error=system ($cmd); if ($error) { die "failed: $!" };        
+	    my $error=system ($cmd); if ($error) { die "failed: $!" };        
 	##########       autogrid4   ##########
-	    $cmd="autogrid4 -p $receptor_name$ligand_name.gpf -l $receptor_name$ligand_name.glg";
+	    $cmd="autogrid4 -p $receptor_name_chain$ligand_name.gpf -l $receptor_name_chain$ligand_name.glg";
 	    print outlog "\n$cmd\n";
 	     my $error=system ($cmd); if ($error) { die "failed: $!" };  
 	##########     prepare dpf   ##########
@@ -130,13 +130,13 @@ foreach my $pdb (sort keys %coord){
 	      }
 	    open(fp,">>reference.dpf") or die();
 	    close fp;
-	    $cmd="$prep_dpf4 -r $receptor -l $ligand -o $receptor_name$ligand_name.dpf";
+	    $cmd="$prep_dpf4 -r $receptor -l $ligand -o $receptor_name_chain$ligand_name.dpf";
 	    print outlog "\n$cmd\n";
 	     my $error=system ($cmd); if ($error) { die "failed: $!" };
-	    $cmd="sed -i 's/\#/\ \#/g' $receptor_name$ligand_name.dpf"; #to compensate for a prepare_dpf4 bug
+	    $cmd="sed -i 's/\#/\ \#/g' $receptor_name_chain$ligand_name.dpf"; #to compensate for a prepare_dpf4 bug
 	    my $error=system ($cmd); if ($error) { die "failed: $!" };
 	##########       autodock4 [fork]  ##########
-	    $cmd="autodock4 -p $receptor_name$ligand_name.dpf -l $receptor_name$ligand_name.dlg";
+	    $cmd="autodock4 -p $receptor_name_chain$ligand_name.dpf -l $receptor_name_chain$ligand_name.dlg";
 	    my $pid=fork();
 	    if ($pid == -1) {
 	       die "failed: $!";

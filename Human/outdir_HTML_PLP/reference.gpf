@@ -1,0 +1,4 @@
+npts 58 58 58                        # num.grid points in xyz
+
+
+gridcenter 3.133 45.295 18.940

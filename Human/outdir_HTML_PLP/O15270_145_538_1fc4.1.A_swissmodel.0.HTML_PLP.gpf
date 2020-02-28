@@ -1,0 +1,18 @@
+npts 58 58 58                        # num.grid points in xyz
+gridfld O15270_145_538_1fc4.1.A_swissmodel.maps.fld # grid_data_file
+spacing 0.375                        # spacing(A)
+receptor_types A C HD N OA SA        # receptor atom types
+ligand_types A C HD N NA OA P        # ligand atom types
+receptor O15270_145_538_1fc4.1.A_swissmodel.pdbqt # macromolecule
+gridcenter 3.133 45.295 18.94        # xyz-coordinates or auto
+smooth 0.5                           # store minimum energy w/in rad(A)
+map O15270_145_538_1fc4.1.A_swissmodel.A.map # atom-specific affinity map
+map O15270_145_538_1fc4.1.A_swissmodel.C.map # atom-specific affinity map
+map O15270_145_538_1fc4.1.A_swissmodel.HD.map # atom-specific affinity map
+map O15270_145_538_1fc4.1.A_swissmodel.N.map # atom-specific affinity map
+map O15270_145_538_1fc4.1.A_swissmodel.NA.map # atom-specific affinity map
+map O15270_145_538_1fc4.1.A_swissmodel.OA.map # atom-specific affinity map
+map O15270_145_538_1fc4.1.A_swissmodel.P.map # atom-specific affinity map
+elecmap O15270_145_538_1fc4.1.A_swissmodel.e.map # electrostatic potential map
+dsolvmap O15270_145_538_1fc4.1.A_swissmodel.d.map              # desolvation potential map
+dielectric -0.1465                   # <0, AD4 distance-dep.diel;>0, constant

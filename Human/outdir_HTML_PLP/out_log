@@ -1,0 +1,108 @@
+command: ./procedure_reverse_docking_p.pl rd_conf_HTML_PLP.txt
+job started at 15:14:08 on 27 01 2020 
+
+#### configuration parameters ####
+
+ 
+
+receptor_dir     ./pdb 		                       # path to receptor pdb files
+ligand           HTML_PLP.pdbqt                        # ligand file
+coord_file       Human_Orf_pred.coord                  # table of gridcenter:  receptor_name1 x, y, z
+script_path      ./script                              # path to python scripts
+
+gpf_par          ./reference.gpf                       # autogrid4 format
+dpf_par          ./reference.dpf                       # autodock4 format
+
+outdir           ./outdir_HTML_PLP                     # directory of results
+          
+
+
+
+#### ligand ####
+
+cp /home/ric/Ricerca/Collaborazioni/Rev_Docking/HTML_PLP.pdbqt /home/ric/Ricerca/Collaborazioni/Rev_Docking/outdir_HTML_PLP
+
+
+#### processing: O14977_10_432_4zgz.1.A_swissmodel.pdbqt ####
+
+/home/ric/Ricerca/Collaborazioni/Rev_Docking/script/pythonsh /home/ric/Ricerca/Collaborazioni/Rev_Docking/script/prepare_receptor4.py -A 'checkhydrogens' -e  -r /home/ric/Ricerca/Collaborazioni/Rev_Docking/pdb/O14977_10_432_4zgz.1.A_swissmodel.pdb -o O14977_10_432_4zgz.1.A_swissmodel.pdbqt -e
+
+cp /home/ric/Ricerca/Collaborazioni/Rev_Docking/reference.gpf ./reference.gpf
+
+/home/ric/Ricerca/Collaborazioni/Rev_Docking/script/pythonsh /home/ric/Ricerca/Collaborazioni/Rev_Docking/script/prepare_gpf4.py -i reference.gpf -r O14977_10_432_4zgz.1.A_swissmodel.pdbqt -l HTML_PLP.pdbqt -o O14977_10_432_4zgz.1.A_swissmodel.0.HTML_PLP.gpf
+
+autogrid4 -p O14977_10_432_4zgz.1.A_swissmodel.0.HTML_PLP.gpf -l O14977_10_432_4zgz.1.A_swissmodel.0.HTML_PLP.glg
+
+cp /home/ric/Ricerca/Collaborazioni/Rev_Docking/reference.dpf ./reference.dpf
+
+/home/ric/Ricerca/Collaborazioni/Rev_Docking/script/pythonsh /home/ric/Ricerca/Collaborazioni/Rev_Docking/script/prepare_dpf42.py -i reference.dpf -r O14977_10_432_4zgz.1.A_swissmodel.pdbqt -l HTML_PLP.pdbqt -o O14977_10_432_4zgz.1.A_swissmodel.0.HTML_PLP.dpf
+
+autodock4 -p O14977_10_432_4zgz.1.A_swissmodel.0.HTML_PLP.dpf -l O14977_10_432_4zgz.1.A_swissmodel.0.HTML_PLP.dlg
+
+
+#### processing: O14977_2_437_4zgz_pdb.pdbqt ####
+
+/home/ric/Ricerca/Collaborazioni/Rev_Docking/script/pythonsh /home/ric/Ricerca/Collaborazioni/Rev_Docking/script/prepare_receptor4.py -A 'checkhydrogens' -e  -r /home/ric/Ricerca/Collaborazioni/Rev_Docking/pdb/O14977_2_437_4zgz_pdb.pdb -o O14977_2_437_4zgz_pdb.pdbqt -e
+
+cp /home/ric/Ricerca/Collaborazioni/Rev_Docking/reference.gpf ./reference.gpf
+
+/home/ric/Ricerca/Collaborazioni/Rev_Docking/script/pythonsh /home/ric/Ricerca/Collaborazioni/Rev_Docking/script/prepare_gpf4.py -i reference.gpf -r O14977_2_437_4zgz_pdb.pdbqt -l HTML_PLP.pdbqt -o O14977_2_437_4zgz_pdb.0.HTML_PLP.gpf
+
+autogrid4 -p O14977_2_437_4zgz_pdb.0.HTML_PLP.gpf -l O14977_2_437_4zgz_pdb.0.HTML_PLP.glg
+
+cp /home/ric/Ricerca/Collaborazioni/Rev_Docking/reference.dpf ./reference.dpf
+
+/home/ric/Ricerca/Collaborazioni/Rev_Docking/script/pythonsh /home/ric/Ricerca/Collaborazioni/Rev_Docking/script/prepare_dpf42.py -i reference.dpf -r O14977_2_437_4zgz_pdb.pdbqt -l HTML_PLP.pdbqt -o O14977_2_437_4zgz_pdb.0.HTML_PLP.dpf
+
+autodock4 -p O14977_2_437_4zgz_pdb.0.HTML_PLP.dpf -l O14977_2_437_4zgz_pdb.0.HTML_PLP.dlg
+
+
+#### processing: O15270_112_537_4bmk.1.A_swissmodel.pdbqt ####
+
+/home/ric/Ricerca/Collaborazioni/Rev_Docking/script/pythonsh /home/ric/Ricerca/Collaborazioni/Rev_Docking/script/prepare_receptor4.py -A 'checkhydrogens' -e  -r /home/ric/Ricerca/Collaborazioni/Rev_Docking/pdb/O15270_112_537_4bmk.1.A_swissmodel.pdb -o O15270_112_537_4bmk.1.A_swissmodel.pdbqt -e
+
+cp /home/ric/Ricerca/Collaborazioni/Rev_Docking/reference.gpf ./reference.gpf
+
+/home/ric/Ricerca/Collaborazioni/Rev_Docking/script/pythonsh /home/ric/Ricerca/Collaborazioni/Rev_Docking/script/prepare_gpf4.py -i reference.gpf -r O15270_112_537_4bmk.1.A_swissmodel.pdbqt -l HTML_PLP.pdbqt -o O15270_112_537_4bmk.1.A_swissmodel.0.HTML_PLP.gpf
+
+autogrid4 -p O15270_112_537_4bmk.1.A_swissmodel.0.HTML_PLP.gpf -l O15270_112_537_4bmk.1.A_swissmodel.0.HTML_PLP.glg
+
+cp /home/ric/Ricerca/Collaborazioni/Rev_Docking/reference.dpf ./reference.dpf
+
+/home/ric/Ricerca/Collaborazioni/Rev_Docking/script/pythonsh /home/ric/Ricerca/Collaborazioni/Rev_Docking/script/prepare_dpf42.py -i reference.dpf -r O15270_112_537_4bmk.1.A_swissmodel.pdbqt -l HTML_PLP.pdbqt -o O15270_112_537_4bmk.1.A_swissmodel.0.HTML_PLP.dpf
+
+autodock4 -p O15270_112_537_4bmk.1.A_swissmodel.0.HTML_PLP.dpf -l O15270_112_537_4bmk.1.A_swissmodel.0.HTML_PLP.dlg
+
+cp /home/ric/Ricerca/Collaborazioni/Rev_Docking/reference.gpf ./reference.gpf
+
+/home/ric/Ricerca/Collaborazioni/Rev_Docking/script/pythonsh /home/ric/Ricerca/Collaborazioni/Rev_Docking/script/prepare_gpf4.py -i reference.gpf -r O15270_112_537_4bmk.1.A_swissmodel.pdbqt -l HTML_PLP.pdbqt -o O15270_112_537_4bmk.1.A_swissmodel.1.HTML_PLP.gpf
+
+autogrid4 -p O15270_112_537_4bmk.1.A_swissmodel.1.HTML_PLP.gpf -l O15270_112_537_4bmk.1.A_swissmodel.1.HTML_PLP.glg
+
+cp /home/ric/Ricerca/Collaborazioni/Rev_Docking/reference.dpf ./reference.dpf
+
+/home/ric/Ricerca/Collaborazioni/Rev_Docking/script/pythonsh /home/ric/Ricerca/Collaborazioni/Rev_Docking/script/prepare_dpf42.py -i reference.dpf -r O15270_112_537_4bmk.1.A_swissmodel.pdbqt -l HTML_PLP.pdbqt -o O15270_112_537_4bmk.1.A_swissmodel.1.HTML_PLP.dpf
+
+autodock4 -p O15270_112_537_4bmk.1.A_swissmodel.1.HTML_PLP.dpf -l O15270_112_537_4bmk.1.A_swissmodel.1.HTML_PLP.dlg
+
+
+#### processing: O15270_145_538_1fc4.1.A_swissmodel.pdbqt ####
+
+/home/ric/Ricerca/Collaborazioni/Rev_Docking/script/pythonsh /home/ric/Ricerca/Collaborazioni/Rev_Docking/script/prepare_receptor4.py -A 'checkhydrogens' -e  -r /home/ric/Ricerca/Collaborazioni/Rev_Docking/pdb/O15270_145_538_1fc4.1.A_swissmodel.pdb -o O15270_145_538_1fc4.1.A_swissmodel.pdbqt -e
+
+cp /home/ric/Ricerca/Collaborazioni/Rev_Docking/reference.gpf ./reference.gpf
+
+/home/ric/Ricerca/Collaborazioni/Rev_Docking/script/pythonsh /home/ric/Ricerca/Collaborazioni/Rev_Docking/script/prepare_gpf4.py -i reference.gpf -r O15270_145_538_1fc4.1.A_swissmodel.pdbqt -l HTML_PLP.pdbqt -o O15270_145_538_1fc4.1.A_swissmodel.0.HTML_PLP.gpf
+
+autogrid4 -p O15270_145_538_1fc4.1.A_swissmodel.0.HTML_PLP.gpf -l O15270_145_538_1fc4.1.A_swissmodel.0.HTML_PLP.glg
+
+cp /home/ric/Ricerca/Collaborazioni/Rev_Docking/reference.dpf ./reference.dpf
+
+/home/ric/Ricerca/Collaborazioni/Rev_Docking/script/pythonsh /home/ric/Ricerca/Collaborazioni/Rev_Docking/script/prepare_dpf42.py -i reference.dpf -r O15270_145_538_1fc4.1.A_swissmodel.pdbqt -l HTML_PLP.pdbqt -o O15270_145_538_1fc4.1.A_swissmodel.0.HTML_PLP.dpf
+
+autodock4 -p O15270_145_538_1fc4.1.A_swissmodel.0.HTML_PLP.dpf -l O15270_145_538_1fc4.1.A_swissmodel.0.HTML_PLP.dlg
+
+
+command: ./procedure_reverse_docking_p.pl rd_conf_HTML_PLP.txt
+job ended at 15:23:23 on 27 01 2020
+

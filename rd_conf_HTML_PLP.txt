@@ -1,0 +1,17 @@
+### Configuration file for reverse docking procedure ###
+
+### change file names according with your paths ###
+###      modify/add GPF or DPF parameters       ###
+ 
+
+receptor_dir     ./pdb 		                       # path to receptor pdb files
+ligand           HTML_PLP.pdbqt                        # ligand file
+coord_file       Human_Orf_pred.coord                  # table of gridcenter:  receptor_name1 x, y, z
+                                                       #                       receptor_name2 x, y, z
+script_path      ./script                              # path to python scripts
+
+gpf_par          ./reference.gpf                       # autogrid4 format
+dpf_par          ./reference.dpf                       # autodock4 format
+
+outdir           ./outdir_HTML_PLP                     # directory of results
+          
