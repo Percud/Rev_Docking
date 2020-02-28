@@ -1,6 +1,7 @@
-# Project Title
+# Docking-based virtual screening of enzymes active sites.
 
-Enzyme substrate active site reverse docking
+Perl scripts and data to performa a virtual screening of a library of enzyme active sites using a particular substrate.
+Coinceived for a High Performance Computer (HPC) cluster
 
 ## Getting Started
 
