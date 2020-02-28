@@ -1,6 +1,6 @@
 # Docking-based virtual screening of enzymes active sites.
 
-Perl scripts and data to performa a virtual screening of a library of enzyme active sites using a particular substrate.
+Perl scripts and data to performa a virtual screening of a library of enzyme active sites using a given substrate.
 Coinceived for a High Performance Computer (HPC) cluster
 
 ## Getting Started
