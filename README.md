@@ -22,5 +22,6 @@ can be obtained with the following utility:
 ```
 Utility_scripts/procedure_get_coord_from_resn.pl -a NZ Human/Human_Orf_pred.resn Human/pdb
 ```
-The command will extract coordinates from the pdb files stored in the Huma/pdb directory
+The command will extract coordinates from the pdb files stored in the Huma/pdb directory.
+pdb_id, chain, and residue number are specified in the input file. The -a option specifies the particular atom (defauld CA).
 See  [Human_Orf_pred.resn](https://github.com/Percud/Rev_Docking/edit/master/Human/Human_Orf_pred.resn) for input file specs
