@@ -13,7 +13,7 @@ Perl, Phyton, linux
 ## Example
 
 ```
-procedure_reverse_docking_p.pl rd_conf_HTML_PLP.txt
+./procedure_reverse_docking_p.pl rd_conf_HTML_PLP.txt
 ```
 
 List of pdb files with coordinates to center the grid can be obtained through a list of pdb_id chain_id  residue_number
