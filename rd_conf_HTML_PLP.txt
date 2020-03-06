@@ -4,14 +4,14 @@
 ###      modify/add GPF or DPF parameters       ###
  
 
-receptor_dir     Human/pdb 		                          # path to receptor pdb files
-ligand           Docking_data/HTML_PLP.pdbqt           # ligand file
-coord_file       Human/Human_Orf_pred.coord            # table of gridcenter:  receptor_name1 x y z
-                                                       #                       receptor_name2 x y z
-script_path      Autodock_scripts                      # path to python scripts
+receptor_dir     ./Human/pdb 		                          # path to receptor pdb files
+ligand           ./Docking_data/HTML_PLP.pdbqt           # ligand file
+coord_file       ./Human/Human_Orf_pred.coord            # table of gridcenter:  receptor_name1 x y z
+                                                         #                       receptor_name2 x y z
+script_path      ./Autodock_scripts                      # path to python scripts
 
-gpf_par          Docking_data//reference.gpf           # autogrid4 format
-dpf_par          Docking_data//reference.dpf           # autodock4 format
+gpf_par          ./Docking_data/reference.gpf            # autogrid4 format
+dpf_par          ./Docking_data/reference.dpf            # autodock4 format
 
-outdir           Human/outdir_HTML_PLP                 # directory of results
+outdir           ./Human/outdir_HTML_PLP                  # directory of results
           
