@@ -4,7 +4,7 @@
 ###      modify/add GPF or DPF parameters       ###
  
 
-receptor_dir     ./Human/pdb 		                          # path to receptor pdb files
+receptor_dir     ./Human/pdb                             # path to receptor pdb files
 ligand           ./Docking_data/HTML_PLP.pdbqt           # ligand file
 coord_file       ./Human/Human_Orf_pred.coord            # table of gridcenter:  receptor_name1 x y z
                                                          #                       receptor_name2 x y z
