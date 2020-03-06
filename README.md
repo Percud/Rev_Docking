@@ -9,12 +9,12 @@ Coinceived for a High Performance Computer (HPC) cluster
 ### Prerequisites
 
 AutoDock >=4.2.6
+
+Mgltools >=1.5.6
+
 Perl, Phyton, linux
 
-mgltools
-set abs path in [pythonsh](https://github.com/Percud/Rev_Docking/blob/master/Autodock_scripts/pythonsh)
 
-MGL_ROOT="/home/ric/INSTALLAZIONI/mgltools_x86_64Linux2_1.5.6" 
 ## Example
 Screen a library of enzyme active sites with a particular substrate
 ```
