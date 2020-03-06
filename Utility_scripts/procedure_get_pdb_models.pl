@@ -1,10 +1,8 @@
 #!/usr/bin/perl
-<<<<<<< HEAD:Utility_scripts/procedure_get_pdb_models.pl
+
 # Retrieve pdb coordinates based on the csv_file (Swissmodel Metadata)
 # Write a csv file with one line per model
-=======
-#
->>>>>>> c859cb42986de9b6473b2c9cdec4a6f44e4c73b6:procedure_get_pdb_models.pl
+
 
 use strict;
 

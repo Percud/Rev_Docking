@@ -2,7 +2,7 @@ TITLE     SWISS-MODEL SERVER (https://swissmodel.expasy.org)
 TITLE    2 Untitled Project
 EXPDTA    THEORETICAL MODEL (SWISS-MODEL SERVER)
 AUTHOR    SWISS-MODEL SERVER (SEE REFERENCE IN JRNL Records)
-REVDAT   1   23-FEB-20 1MOD    1       16:01
+REVDAT   1   01-MAR-20 1MOD    1       11:25
 JRNL        AUTH   A.WATERHOUSE,M.BERTONI,S.BIENERT,G.STUDER,G.TAURIELLO,
 JRNL        AUTH 2 R.GUMIENNY,F.T.HEER,T.A.P.DE BEER,C.REMPFER,L.BORDOLI,
 JRNL        AUTH 3 R.LEPORE,T.SCHWEDE
@@ -2680,15 +2680,15 @@ ATOM   2469  N   GLY A 364     -84.321  16.442  -2.582  1.00  0.85           N
 ATOM   2470  CA  GLY A 364     -84.857  17.708  -2.080  1.00  0.85           C  
 ATOM   2471  C   GLY A 364     -84.288  18.137  -0.750  1.00  0.85           C  
 ATOM   2472  O   GLY A 364     -84.461  19.277  -0.331  1.00  0.85           O  
-ATOM   2473  N   GLN A 365     -83.558  17.233  -0.078  1.00  0.84           N  
-ATOM   2474  CA  GLN A 365     -82.856  17.491   1.166  1.00  0.84           C  
-ATOM   2475  C   GLN A 365     -81.409  17.901   0.957  1.00  0.84           C  
-ATOM   2476  O   GLN A 365     -80.853  17.823  -0.141  1.00  0.84           O  
-ATOM   2477  CB  GLN A 365     -82.864  16.246   2.079  1.00  0.84           C  
-ATOM   2478  CG  GLN A 365     -84.284  15.835   2.513  1.00  0.84           C  
-ATOM   2479  CD  GLN A 365     -84.220  14.650   3.469  1.00  0.84           C  
-ATOM   2480  OE1 GLN A 365     -83.936  13.522   3.066  1.00  0.84           O  
-ATOM   2481  NE2 GLN A 365     -84.487  14.892   4.771  1.00  0.84           N  
+ATOM   2473  N   GLN A 365     -83.558  17.233  -0.078  1.00  0.83           N  
+ATOM   2474  CA  GLN A 365     -82.856  17.491   1.166  1.00  0.83           C  
+ATOM   2475  C   GLN A 365     -81.409  17.901   0.957  1.00  0.83           C  
+ATOM   2476  O   GLN A 365     -80.853  17.823  -0.141  1.00  0.83           O  
+ATOM   2477  CB  GLN A 365     -82.864  16.246   2.079  1.00  0.83           C  
+ATOM   2478  CG  GLN A 365     -84.284  15.835   2.513  1.00  0.83           C  
+ATOM   2479  CD  GLN A 365     -84.220  14.650   3.469  1.00  0.83           C  
+ATOM   2480  OE1 GLN A 365     -83.936  13.522   3.066  1.00  0.83           O  
+ATOM   2481  NE2 GLN A 365     -84.487  14.892   4.771  1.00  0.83           N  
 ATOM   2482  N   ARG A 366     -80.762  18.360   2.047  1.00  0.83           N  
 ATOM   2483  CA  ARG A 366     -79.439  18.946   1.992  1.00  0.83           C  
 ATOM   2484  C   ARG A 366     -78.489  18.430   3.066  1.00  0.83           C  

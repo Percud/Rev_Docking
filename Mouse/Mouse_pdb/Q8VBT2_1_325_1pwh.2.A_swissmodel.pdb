@@ -2,7 +2,7 @@ TITLE     SWISS-MODEL SERVER (https://swissmodel.expasy.org)
 TITLE    2 Untitled Project
 EXPDTA    THEORETICAL MODEL (SWISS-MODEL SERVER)
 AUTHOR    SWISS-MODEL SERVER (SEE REFERENCE IN JRNL Records)
-REVDAT   1   22-FEB-20 1MOD    1       03:08
+REVDAT   1   28-FEB-20 1MOD    1       19:43
 JRNL        AUTH   A.WATERHOUSE,M.BERTONI,S.BIENERT,G.STUDER,G.TAURIELLO,
 JRNL        AUTH 2 R.GUMIENNY,F.T.HEER,T.A.P.DE BEER,C.REMPFER,L.BORDOLI,
 JRNL        AUTH 3 R.LEPORE,T.SCHWEDE
@@ -2324,14 +2324,14 @@ ATOM   2160  NE  ARG A 290      27.776 -64.947 -32.550  1.00  0.78           N
 ATOM   2161  CZ  ARG A 290      27.064 -63.911 -32.065  1.00  0.78           C  
 ATOM   2162  NH1 ARG A 290      25.961 -63.515 -32.676  1.00  0.78           N  
 ATOM   2163  NH2 ARG A 290      27.464 -63.280 -30.959  1.00  0.78           N  
-ATOM   2164  N   LEU A 291      25.153 -70.594 -31.161  1.00  0.86           N  
-ATOM   2165  CA  LEU A 291      25.037 -71.594 -30.128  1.00  0.86           C  
-ATOM   2166  C   LEU A 291      24.131 -72.681 -30.684  1.00  0.86           C  
-ATOM   2167  O   LEU A 291      23.147 -72.413 -31.369  1.00  0.86           O  
-ATOM   2168  CB  LEU A 291      24.427 -71.014 -28.825  1.00  0.86           C  
-ATOM   2169  CG  LEU A 291      25.410 -70.763 -27.664  1.00  0.86           C  
-ATOM   2170  CD1 LEU A 291      24.672 -70.091 -26.499  1.00  0.86           C  
-ATOM   2171  CD2 LEU A 291      26.056 -72.051 -27.143  1.00  0.86           C  
+ATOM   2164  N   LEU A 291      25.153 -70.594 -31.161  1.00  0.87           N  
+ATOM   2165  CA  LEU A 291      25.037 -71.594 -30.128  1.00  0.87           C  
+ATOM   2166  C   LEU A 291      24.131 -72.681 -30.684  1.00  0.87           C  
+ATOM   2167  O   LEU A 291      23.147 -72.413 -31.369  1.00  0.87           O  
+ATOM   2168  CB  LEU A 291      24.427 -71.014 -28.825  1.00  0.87           C  
+ATOM   2169  CG  LEU A 291      25.410 -70.763 -27.664  1.00  0.87           C  
+ATOM   2170  CD1 LEU A 291      24.672 -70.091 -26.499  1.00  0.87           C  
+ATOM   2171  CD2 LEU A 291      26.056 -72.051 -27.143  1.00  0.87           C  
 ATOM   2172  N   GLN A 292      24.474 -73.954 -30.432  1.00  0.78           N  
 ATOM   2173  CA  GLN A 292      23.686 -75.103 -30.831  1.00  0.78           C  
 ATOM   2174  C   GLN A 292      22.307 -75.227 -30.182  1.00  0.78           C  
