@@ -6,8 +6,8 @@
 
 ######
 ## Set some environment variable.
-MGL_ROOT="/home/ric/INSTALLAZIONI/mgltools_x86_64Linux2_1.5.6" 
-export MGL_ROOT
+#MGL_ROOT="/home/ric/INSTALLAZIONI/mgltools_x86_64Linux2_1.5.6" 
+#export MGL_ROOT
 
 ########
 ## plaform we run on
