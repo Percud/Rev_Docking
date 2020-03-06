@@ -16,7 +16,8 @@ if (@ARGV<1){
 my($conf)=@ARGV;
 
 my %par= (
-         receptor_dir=>'./pdb',        
+	 MGL_ROOT=>'/usr/lib/mgltools_x86_64Linux2_1.5.6',
+	 receptor_dir=>'./pdb',        
          ligand      =>'ligand.pdb',  
          coord_file  =>'coord_tab',   
          script_path =>'./script',
@@ -24,9 +25,6 @@ my %par= (
          dpf_par     =>'./reference.dpf',
          outdir      =>'./outdir'
 );
-
-
-
 
 ### read configuration_file
 my $conf_log;
@@ -37,6 +35,10 @@ while (<fp>){
     $par{$1}=$2 if (/^\s*(\S+)\s+(\S+)/);
     }
 close fp;
+
+#Set MGL_ROOT environmental variable
+$ENV{'MGL_TOOL'}=$par{'MGL_TOOL'};
+
 
 mkdir("$par{outdir}") or die "Can't mkdir $par{outdir} $!";
 
