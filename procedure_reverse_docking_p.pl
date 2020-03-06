@@ -37,7 +37,7 @@ while (<fp>){
 close fp;
 
 #Set MGL_ROOT environmental variable
-$ENV{'MGL_TOOL'}=$par{'MGL_TOOL'};
+$ENV{'MGL_ROOT'}=$par{'MGL_ROOT'};
 
 
 mkdir("$par{outdir}") or die "Can't mkdir $par{outdir} $!";
