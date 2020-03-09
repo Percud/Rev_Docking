@@ -15,7 +15,7 @@ my %aa3to1=(
    'ILE'=>'I', 'LEU'=>'L', 'ASP'=>'D', 'GLU'=>'E', 'LYS'=>'K',
    'ARG'=>'R', 'SER'=>'S', 'THR'=>'T', 'TYR'=>'Y', 'HIS'=>'H',
    'CYS'=>'C', 'ASN'=>'N', 'GLN'=>'Q', 'TRP'=>'W', 'GLY'=>'G',
-   'MSE'=>'M',
+   'MSE'=>'M', 'LLP' => 'K',
 );
 
 foreach my $pdb_file(@ARGV){
@@ -30,7 +30,7 @@ foreach my $pdb_file(@ARGV){
         chomp($line);
 	last if ($line=~/^ENDMDL/); # just the first model
         if ($line=~/^ATOM\s{2,6}\d{1,5}\s{2}CA\s[\sA]([A-Z]{3})\s([\s\w])\s*(\d{1,4})/
-         or $line=~/^HETATM\s{0,4}\d{1,5}\s{2}CA\s[\sA](MSE)\s([\s\w])\s*(\d{1,4})/){
+         or $line=~/^HETATM\s{0,4}\d{1,5}\s{2}CA\s[\sA](MSE|LLP)\s([\s\w])\s*(\d{1,4})/){
             my $res="$1";
             my $chain="$2";
             $resn{$chain}="$3";
