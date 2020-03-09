@@ -38,8 +38,8 @@ while(my $line=<fp>){
   
   my $found=0;
   while(my $pdb_line=<pdb>){
-    if ($pdb_line=~/^ATOM.*$Atom\s.*[A-Z]{3}\s$chain\s*$K_resn\s+(\S+\s+\S+\s+\S+\s+)/){
-        printf "$model $1\n";
+    if ($pdb_line=~/^ATOM.*$Atom\s.*[A-Z]{3}\s$chain\s*$K_resn\s+(-*\d+\.\d+)\s*(-*\d+\.\d+)\s*(-*\d+\.\d+)/){
+        printf "$model $1 $2 $3\n";
         $found=1;
     }
  }
