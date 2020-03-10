@@ -103,8 +103,8 @@ foreach my $pdb (sort keys %coord){
     next if (!-e  "$par{receptor_dir}/$pdb"); 
     $cmd="$prep_receptor -r $par{receptor_dir}/$pdb -o $receptor -e";
     print outlog "\n$cmd\n";
-    my $error=system ($cmd); if ($error) { die "failed: $!" };
-    #$cmd="sed -i \"/.*HETATM.*/d\" *.pdbqt"; #check if needed
+    my $error=system ($cmd); if ($error) { print outlog "**failed: $!"; warn "**failed: $!" };
+    
 
 ##########   prepare gpf   ##########
     for my $i (0 .. $#{ $coord{$pdb} }){
@@ -119,11 +119,11 @@ foreach my $pdb (sort keys %coord){
 	    close fp;
 	    $cmd="$prep_gpf4 -r $receptor -l $ligand -o $receptor_name_chain$ligand_name.gpf";
 	    print outlog "\n$cmd\n";
-	    my $error=system ($cmd); if ($error) { die "failed: $!" };        
+	    my $error=system ($cmd); if ($error) { print outlog "**failed: $!"; warn "**failed: $!" };        
 	##########       autogrid4   ##########
 	    $cmd="autogrid4 -p $receptor_name_chain$ligand_name.gpf -l $receptor_name_chain$ligand_name.glg";
 	    print outlog "\n$cmd\n";
-	     my $error=system ($cmd); if ($error) { die "failed: $!" };  
+	    my $error=system ($cmd); if ($error) { print outlog "**failed: $!"; warn "**failed: $!" };  
 	##########     prepare dpf   ##########
 	    $cmd="cp $par{dpf_par} ./reference.dpf";
 	    if (-e $par{dpf_par}){
@@ -134,14 +134,14 @@ foreach my $pdb (sort keys %coord){
 	    close fp;
 	    $cmd="$prep_dpf4 -r $receptor -l $ligand -o $receptor_name_chain$ligand_name.dpf";
 	    print outlog "\n$cmd\n";
-	     my $error=system ($cmd); if ($error) { die "failed: $!" };
+	    my $error=system ($cmd); if ($error) { print outlog "**failed: $!"; warn "**failed: $!"  };
 	    $cmd="sed -i 's/\#/\ \#/g' $receptor_name_chain$ligand_name.dpf"; #to compensate for a prepare_dpf4 bug
-	    my $error=system ($cmd); if ($error) { die "failed: $!" };
+	    my $error=system ($cmd); if ($error) { print outlog "**failed: $!"; warn "**failed: $!"  };
 	##########       autodock4 [fork]  ##########
 	    $cmd="autodock4 -p $receptor_name_chain$ligand_name.dpf -l $receptor_name_chain$ligand_name.dlg";
 	    my $pid=fork();
 	    if ($pid == -1) {
-	       die "failed: $!";
+	       print outlog "**failed: $!"; warn "**failed: $!";
 	   } elsif ($pid == 0) {
 	      exec $cmd;
 	   }
