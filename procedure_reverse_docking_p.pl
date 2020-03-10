@@ -50,7 +50,7 @@ for my $k (keys %par){
 my $opath=`pwd`;
 chdir("$par{outdir}") or die "Can't chdir $par{outdir} $!";
 
-printf "Results written in: $par{outdir}\nLog written in: $par{outdir}/outlog\n";
+printf "Results written in: $par{outdir}\nLog written in: $par{outdir}/out_log\n";
 open (outlog,">out_log") or die(); #log file
 my ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst) = localtime(time);
 printf outlog "command: %s %s\n",$0, join(' ',@ARGV);  
