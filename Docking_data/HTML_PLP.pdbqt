@@ -1,71 +1,76 @@
 REMARK  13 active torsions:
 REMARK  status: ('A' for Active; 'I' for Inactive)
-REMARK    1  A    between atoms: C13_1  and  C12_3
-REMARK    2  A    between atoms: N14_2  and  C15_18
-REMARK    3  A    between atoms: C5_4  and  C6_10
-REMARK    4  A    between atoms: C29_8  and  O30_16
-REMARK    5  A    between atoms: C6_10  and  O7_11
-REMARK    6  A    between atoms: O7_11  and  P8_12
-REMARK    7  A    between atoms: C15_18  and  C17_29
-REMARK    8  A    between atoms: C15_18  and  C20_19
-REMARK    9  A    between atoms: C20_19  and  C22_20
-REMARK   10  A    between atoms: C20_19  and  O21_27
-REMARK   11  A    between atoms: C22_20  and  C23_21
-REMARK   12  A    between atoms: C23_21  and  C24_22
-REMARK   13  A    between atoms: C24_22  and  N25_23
+REMARK    1  A    between atoms: C_1  and  C_2 
+REMARK    2  A    between atoms: C_3  and  C_9 
+REMARK    3  A    between atoms: C_8  and  O_15 
+REMARK    4  A    between atoms: C_9  and  O_10 
+REMARK    5  A    between atoms: O_10  and  P_11 
+REMARK    6  A    between atoms: N_17  and  C_18 
+REMARK    7  A    between atoms: C_18  and  C_27 
+REMARK    8  A    between atoms: C_18  and  C_19 
+REMARK    9  A    between atoms: C_19  and  C_20 
+REMARK   10  A    between atoms: C_19  and  O_30 
+REMARK   11  A    between atoms: C_20  and  C_21 
+REMARK   12  A    between atoms: C_21  and  C_22 
+REMARK   13  A    between atoms: C_22  and  N_23 
 ROOT
-ATOM      1  C13 PLP A           0.582   1.103  -0.673  0.00  0.00     0.117 C
-ATOM      2  C12 PLP A           1.808   1.619  -0.020  0.00  0.00     0.031 A
-ATOM      3  C5  PLP A           2.826   0.731   0.367  0.00  0.00     0.008 A
-ATOM      4  C4  PLP A           3.941   1.293   0.980  0.00  0.00     0.118 A
-ATOM      5  N3  PLP A           4.099   2.621   1.235  0.00  0.00    -0.259 NA
-ATOM      6  C2  PLP A           3.088   3.447   0.873  0.00  0.00     0.068 A
-ATOM      7  C29 PLP A           1.932   2.990   0.246  0.00  0.00     0.102 A
-ATOM      8  C1  PLP A           3.255   4.900   1.200  0.00  0.00     0.070 C
-ATOM      9  O30 PLP A           0.954   3.898  -0.076  0.00  0.00    -0.358 OA
-ATOM     10  H57 PLP A           0.202   3.381  -0.462  0.00  0.00     0.218 HD
-ATOM     11  N14 HTL A          -0.417   1.881  -0.963  0.00  0.00    -0.280 NA
+ATOM      1  C   PLP A          -0.290   1.758  -0.625  0.00  0.00     0.117 C 
+ATOM      2  N   HTL A          -0.620   0.807  -1.431  0.00  0.00    -0.280 NA
 ENDROOT
-BRANCH  11  12
-ATOM     12  C15 HTL A          -1.584   1.105  -1.494  0.00  0.00     0.179 C
+BRANCH   1   3
+ATOM      3  C   PLP A           1.065   1.841   0.016  0.00  0.00     0.031 A 
+ATOM      4  C   PLP A           1.384   3.037   0.712  0.00  0.00     0.102 A 
+ATOM      5  C   PLP A           2.662   3.177   1.310  0.00  0.00     0.068 A 
+ATOM      6  N   PLP A           3.553   2.163   1.212  0.00  0.00    -0.259 NA
+ATOM      7  C   PLP A           3.126   4.401   2.055  0.00  0.00     0.070 C 
+ATOM      8  C   PLP A           3.283   1.006   0.565  0.00  0.00     0.118 A 
+ATOM      9  C   PLP A           2.039   0.798  -0.056  0.00  0.00     0.008 A 
+BRANCH   4  10
+ATOM     10  O   PLP A           0.454   4.019   0.772  0.00  0.00    -0.358 OA
+ATOM     11  H   PLP A           0.556   4.872   1.209  0.00  0.00     0.218 HD
+ENDBRANCH   4  10
+BRANCH   9  12
+ATOM     12  C   PLP A           1.772  -0.520  -0.770  0.00  0.00     0.203 C 
 BRANCH  12  13
-ATOM     13  C17 HTL A          -2.620   2.035  -2.201  0.00  0.00     0.069 C
-ATOM     14  O19 HTL A          -2.910   1.723  -3.394  0.00  0.00    -0.548 OA
-ATOM     15  O18 HTL A          -3.175   2.904  -1.456  0.00  0.00    -0.548 OA
+ATOM     13  O   PLP A           2.872  -1.406  -0.730  0.00  0.00    -0.350 OA
+BRANCH  13  14
+ATOM     14  P   PLP A           2.724  -2.468   0.657  0.00  0.00     0.060 P 
+ATOM     15  O   PLP A           1.655  -3.542   0.322  0.00  0.00    -0.634 OA
+ATOM     16  O   PLP A           4.212  -3.311   0.949  0.00  0.00    -0.634 OA
+ATOM     17  O   PLP A           2.202  -1.632   2.087  0.00  0.00    -0.634 OA
+ENDBRANCH  13  14
 ENDBRANCH  12  13
-BRANCH  12  16
-ATOM     16  C20 HTL A          -2.325   0.432  -0.313  0.00  0.00     0.145 C
-BRANCH  16  17
-ATOM     17  C22 HTL A          -3.491  -0.443  -0.779  0.00  0.00     0.040 C
-BRANCH  17  18
-ATOM     18  C23 HTL A          -4.248  -1.039   0.406  0.00  0.00     0.053 C
+ENDBRANCH   9  12
+ENDBRANCH   1   3
+BRANCH   2  18
+ATOM     18  C   HTL A          -1.892   0.734  -2.133  0.00  0.00     0.179 C 
 BRANCH  18  19
-ATOM     19  C24 HTL A          -5.501  -1.749  -0.080  0.00  0.00     0.130 C
-BRANCH  19  20
-ATOM     20  N25 HTL A          -6.566  -1.914   1.030  0.00  0.00     0.248 N
-ATOM     21  C28 HTL A          -5.970  -2.594   2.253  0.00  0.00     0.189 C
-ATOM     22  C26 HTL A          -7.135  -0.551   1.417  0.00  0.00     0.189 C
-ATOM     23  C27 HTL A          -7.686  -2.772   0.470  0.00  0.00     0.189 C
-ENDBRANCH  19  20
+ATOM     19  C   HTL A          -2.087   1.989  -2.963  0.00  0.00     0.069 C 
+ATOM     20  O   HTL A          -1.260   2.283  -3.812  0.00  0.00    -0.548 OA
+ATOM     21  O   HTL A          -3.151   2.795  -2.775  0.00  0.00    -0.548 OA
 ENDBRANCH  18  19
-ENDBRANCH  17  18
-ENDBRANCH  16  17
-BRANCH  16  24
-ATOM     24  O21 HTL A          -2.814   1.383   0.650  0.00  0.00    -0.391 OA
-ATOM     25  H41 HTL A          -2.921   2.224   0.133  0.00  0.00     0.211 HD
-ENDBRANCH  16  24
-ENDBRANCH  12  16
-ENDBRANCH  11  12
-BRANCH   3  26
-ATOM     26  C6  PLP A           2.730  -0.761   0.140  0.00  0.00     0.203 C
-BRANCH  26  27
-ATOM     27  O7  PLP A           3.785  -1.476   0.741  0.00  0.00    -0.350 OA
-BRANCH  27  28
-ATOM     28  P8  PLP A           3.518  -3.095   0.802  0.00  0.00     0.060 P
-ATOM     29  O9  PLP A           2.341  -3.224   1.760  0.00  0.00    -0.634 OA
-ATOM     30  O10 PLP A           3.182  -3.454  -0.638  0.00  0.00    -0.634 OA
-ATOM     31  O11 PLP A           4.832  -3.655   1.318  0.00  0.00    -0.634 OA
-ENDBRANCH  27  28
-ENDBRANCH  26  27
-ENDBRANCH   3  26
+BRANCH  18  22
+ATOM     22  C   HTL A          -3.078   0.449  -1.166  0.00  0.00     0.145 C 
+BRANCH  22  23
+ATOM     23  C   HTL A          -2.875  -0.886  -0.402  0.00  0.00     0.040 C 
+BRANCH  23  24
+ATOM     24  C   HTL A          -3.956  -1.247   0.644  0.00  0.00     0.053 C 
+BRANCH  24  25
+ATOM     25  C   HTL A          -5.358  -1.529   0.039  0.00  0.00     0.130 C 
+BRANCH  25  26
+ATOM     26  N   HTL A          -6.385  -2.058   0.990  0.00  0.00     0.248 N 
+ATOM     27  C   HTL A          -7.666  -2.190   0.250  0.00  0.00     0.189 C 
+ATOM     28  C   HTL A          -6.599  -1.136   2.129  0.00  0.00     0.189 C 
+ATOM     29  C   HTL A          -6.012  -3.399   1.501  0.00  0.00     0.189 C 
+ENDBRANCH  25  26
+ENDBRANCH  24  25
+ENDBRANCH  23  24
+ENDBRANCH  22  23
+BRANCH  22  30
+ATOM     30  O   HTL A          -4.276   0.428  -1.902  0.00  0.00    -0.391 OA
+ATOM     31  H   HTL A          -4.222  -0.324  -2.549  0.00  0.00     0.211 HD
+ENDBRANCH  22  30
+ENDBRANCH  18  22
+ENDBRANCH   2  18
 TORSDOF 13
+
