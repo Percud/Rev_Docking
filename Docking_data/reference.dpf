@@ -1,4 +1,4 @@
 ga_pop_size 250                      # number of individuals in population
 ga_num_evals 7000000                 # maximum number of energy evaluations
-ga_run 50                            # do this many hybrid GA-LS runs
+ga_run 100                            # do this many hybrid GA-LS runs
 
