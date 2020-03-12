@@ -51,7 +51,7 @@ foreach my $f (@F) {
 
     }
         	
-    printf "$f\t%s ($best_run)\t%s ($best_large_run)\t%s ($best_large_run_atom)\t#%s\n", $E{$best_run},$E{$best_large_run},$E{$best_large_run_atom},$large_num;
+    printf "%50s\t%s ($best_run)\t%s ($best_large_run)\t%s ($best_large_run_atom)\t#%s\n", $f,$E{$best_run},$E{$best_large_run},$E{$best_large_run_atom},$large_num;
 }
 
 
