@@ -36,7 +36,7 @@ foreach my $f (@F) {
 		}
 	
     	#CLUSTERING HISTOGRAM
-        if (/^\s+(\d+).*\|.*\|\s+\d+\s+.*\s+(\S+)\s+\|\#/){
+        if (/^\s+(\d+).*\|.*\|\s+(\d+)\s+.*\s+(\S+)\s+\|\#/){
             my ($rank,$run,$num)=($1,$2,$3);
 	    $best_run=$run if (!defined $best_run); #the first listed is best cluster 
             ($large_rank,$best_large_run,$large_num)=($rank,$run,$num) if (!defined $large_num or $num > $large_num);
