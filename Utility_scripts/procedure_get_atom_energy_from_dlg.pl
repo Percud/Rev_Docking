@@ -4,8 +4,11 @@
 #
 
 use strict;
+use Getopt::Long;
 
-my $usage="$0 ATOM_RES directory_dlg_file\n";
+my $usage="$0 ATOM_RES directory_dlg_files\n";
+
+my (@e)
 
 my($atom_id,$d)=(shift,shift);
 die ($usage) unless ($d);
