@@ -1,5 +1,6 @@
 #!/bin/bash
-#Replace HETATM for Lys atoms of the internal aldimine 
+#Replace HETATM for Lys atoms of the internal aldimine of pdb files 
+#in current directory
 
 #Usage procedure_transform_LLP_aldimmine.sh 
 
