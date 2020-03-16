@@ -1,0 +1,61 @@
+REMARK  9 active torsions:
+REMARK  status: ('A' for Active; 'I' for Inactive)
+REMARK    1  A    between atoms: C_5  and  C_22 
+REMARK    2  A    between atoms: C_6  and  C_8 
+REMARK    3  A    between atoms: N_9  and  CA_10 
+REMARK    4  A    between atoms: C_7  and  O_28 
+REMARK    5  A    between atoms: CA_10  and  C_11 
+REMARK    6  A    between atoms: CA_10  and  C_19 
+REMARK    7  A    between atoms: C_11  and  C_12 
+REMARK    8  A    between atoms: C_22  and  O_23 
+REMARK    9  A    between atoms: O_23  and  P_24 
+ROOT
+ATOM      1  C   PLP A           6.368   9.615   3.443  0.00  0.00     0.070 C 
+ATOM      2  C   PLP A           6.500   8.120   3.440  0.00  0.00     0.068 A 
+ATOM      3  N   PLP A           6.358   7.450   4.605  0.00  0.00    -0.259 NA
+ATOM      4  C   PLP A           6.438   6.103   4.675  0.00  0.00     0.118 A 
+ATOM      5  C   PLP A           6.676   5.329   3.526  0.00  0.00     0.008 A 
+ATOM      6  C   PLP A           6.860   5.993   2.271  0.00  0.00     0.031 A 
+ATOM      7  C   PLP A           6.754   7.426   2.248  0.00  0.00     0.102 A 
+ENDROOT
+BRANCH   6   8
+ATOM      8  C   PLP A           7.159   5.188   1.037  0.00  0.00     0.117 C 
+ATOM      9  N   HIS A           7.536   5.758  -0.048  0.00  0.00    -0.283 NA
+BRANCH   9  10
+ATOM     10  CA  HIS A           7.857   5.101  -1.297  0.00  0.00     0.157 C 
+BRANCH  10  11
+ATOM     11  C   HIS A           9.000   4.063  -1.105  0.00  0.00     0.086 C 
+BRANCH  11  12
+ATOM     12  C   HIS A          10.039   4.151  -2.190  0.00  0.00     0.024 A 
+ATOM     13  C   HIS A          10.816   5.263  -2.452  0.00  0.00     0.091 A 
+ATOM     14  N   HIS A          11.660   4.958  -3.453  0.00  0.00    -0.314 N 
+ATOM     15  C   HIS A          11.392   3.682  -3.787  0.00  0.00     0.148 A 
+ATOM     16  H   HIS A          12.381   5.586  -3.874  0.00  0.00     0.153 HD
+ATOM     17  N   HIS A          10.402   3.162  -3.029  0.00  0.00    -0.312 N 
+ATOM     18  HD1 HIS A          10.016   2.195  -3.081  0.00  0.00     0.153 HD
+ENDBRANCH  11  12
+ENDBRANCH  10  11
+BRANCH  10  19
+ATOM     19  C   HIS A           6.594   4.545  -1.919  0.00  0.00     0.066 C 
+ATOM     20  O   HIS A           5.662   5.300  -2.152  0.00  0.00    -0.548 OA
+ATOM     21  OXT HIS A           6.456   3.232  -2.186  0.00  0.00    -0.548 OA
+ENDBRANCH  10  19
+ENDBRANCH   9  10
+ENDBRANCH   6   8
+BRANCH   5  22
+ATOM     22  C   PLP A           6.767   3.820   3.702  0.00  0.00     0.203 C 
+BRANCH  22  23
+ATOM     23  O   PLP A           5.923   3.383   4.748  0.00  0.00    -0.350 OA
+BRANCH  23  24
+ATOM     24  P   PLP A           6.864   2.634   6.018  0.00  0.00     0.060 P 
+ATOM     25  O   PLP A           7.546   1.369   5.432  0.00  0.00    -0.634 OA
+ATOM     26  O   PLP A           8.106   3.685   6.625  0.00  0.00    -0.634 OA
+ATOM     27  O   PLP A           5.828   2.097   7.303  0.00  0.00    -0.634 OA
+ENDBRANCH  23  24
+ENDBRANCH  22  23
+ENDBRANCH   5  22
+BRANCH   7  28
+ATOM     28  O   PLP A           6.863   8.191   1.132  0.00  0.00    -0.358 OA
+ATOM     29  H   PLP A           6.951   7.915   0.217  0.00  0.00     0.218 HD
+ENDBRANCH   7  28
+TORSDOF 9

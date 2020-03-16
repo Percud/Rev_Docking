@@ -1,0 +1,71 @@
+REMARK  11 active torsions:
+REMARK  status: ('A' for Active; 'I' for Inactive)
+REMARK    1  A    between atoms: C5_5  and  C6_6 
+REMARK    2  A    between atoms: C6_6  and  O7_7 
+REMARK    3  A    between atoms: O7_7  and  P8_8 
+REMARK    4  A    between atoms: C12_12  and  C13_13 
+REMARK    5  A    between atoms: N14_14  and  C15_15 
+REMARK    6  A    between atoms: C15_15  and  C17_16 
+REMARK    7  A    between atoms: C15_15  and  C27_26 
+REMARK    8  A    between atoms: C17_16  and  C18_17 
+REMARK    9  A    between atoms: C18_17  and  C20_19 
+REMARK   10  A    between atoms: C25_24  and  N26_25 
+REMARK   11  A    between atoms: C30_29  and  O31_30 
+ROOT
+ATOM      1  C13 PLP A          -0.321   1.094   0.693  0.00  0.00     0.117 C 
+ATOM      2  N14 KYN A           0.869   1.540   0.885  0.00  0.00    -0.283 NA
+ENDROOT
+BRANCH   2   3
+ATOM      3  C15 KYN A           1.754   1.096   1.945  0.00  0.00     0.159 C 
+BRANCH   3   4
+ATOM      4  C17 KYN A           3.035   0.493   1.326  0.00  0.00     0.114 C 
+BRANCH   4   5
+ATOM      5  C18 KYN A           2.792  -0.739   0.465  0.00  0.00     0.167 C 
+ATOM      6  O19 KYN A           1.652  -1.158   0.374  0.00  0.00    -0.294 OA
+BRANCH   5   7
+ATOM      7  C20 KYN A           3.921  -1.433  -0.256  0.00  0.00     0.038 A 
+ATOM      8  C21 KYN A           5.237  -0.944  -0.062  0.00  0.00     0.014 A 
+ATOM      9  C22 KYN A           6.335  -1.531  -0.688  0.00  0.00     0.001 A 
+ATOM     10  C23 KYN A           6.159  -2.622  -1.528  0.00  0.00     0.002 A 
+ATOM     11  C24 KYN A           4.884  -3.129  -1.748  0.00  0.00     0.024 A 
+ATOM     12  C25 KYN A           3.753  -2.561  -1.132  0.00  0.00     0.034 A 
+BRANCH  12  13
+ATOM     13  N26 KYN A           2.494  -3.155  -1.439  0.00  0.00    -0.358 N 
+ATOM     14  H45 KYN A           2.450  -3.963  -2.078  0.00  0.00     0.143 HD
+ATOM     15  H46 KYN A           1.592  -2.830  -1.085  0.00  0.00     0.143 HD
+ENDBRANCH  12  13
+ENDBRANCH   5   7
+ENDBRANCH   4   5
+ENDBRANCH   3   4
+BRANCH   3  16
+ATOM     16  C27 KYN A           2.099   2.275   2.813  0.00  0.00     0.067 C 
+ATOM     17  O28 KYN A           2.650   3.256   2.335  0.00  0.00    -0.548 OA
+ATOM     18  O29 KYN A           1.798   2.258   4.125  0.00  0.00    -0.548 OA
+ENDBRANCH   3  16
+ENDBRANCH   2   3
+BRANCH   1  19
+ATOM     19  C12 PLP A          -1.168   1.537  -0.468  0.00  0.00     0.031 A 
+ATOM     20  C5  PLP A          -2.415   0.876  -0.697  0.00  0.00     0.008 A 
+ATOM     21  C4  PLP A          -3.194   1.262  -1.802  0.00  0.00     0.118 A 
+ATOM     22  N3  PLP A          -2.779   2.237  -2.637  0.00  0.00    -0.259 NA
+ATOM     23  C2  PLP A          -1.614   2.899  -2.461  0.00  0.00     0.068 A 
+ATOM     24  C1  PLP A          -1.266   3.970  -3.457  0.00  0.00     0.070 C 
+ATOM     25  C30 PLP A          -0.775   2.579  -1.375  0.00  0.00     0.102 A 
+BRANCH  20  26
+ATOM     26  C6  PLP A          -2.916  -0.235   0.217  0.00  0.00     0.203 C 
+BRANCH  26  27
+ATOM     27  O7  PLP A          -4.173  -0.718  -0.199  0.00  0.00    -0.350 OA
+BRANCH  27  28
+ATOM     28  P8  PLP A          -4.671  -2.006   0.874  0.00  0.00     0.060 P 
+ATOM     29  O9  PLP A          -4.674  -1.465   2.329  0.00  0.00    -0.634 OA
+ATOM     30  O10 PLP A          -3.601  -3.371   0.808  0.00  0.00    -0.634 OA
+ATOM     31  O11 PLP A          -6.301  -2.489   0.523  0.00  0.00    -0.634 OA
+ENDBRANCH  27  28
+ENDBRANCH  26  27
+ENDBRANCH  20  26
+BRANCH  25  32
+ATOM     32  O31 PLP A           0.365   3.301  -1.257  0.00  0.00    -0.358 OA
+ATOM     33  H47 PLP A           1.018   3.278  -0.554  0.00  0.00     0.218 HD
+ENDBRANCH  25  32
+ENDBRANCH   1  19
+TORSDOF 11

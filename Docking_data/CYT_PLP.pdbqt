@@ -1,0 +1,80 @@
+REMARK  14 active torsions:
+REMARK  status: ('A' for Active; 'I' for Inactive)
+REMARK    1  A    between atoms: C_5  and  C_11 
+REMARK    2  A    between atoms: C_6  and  C_7 
+REMARK    3  A    between atoms: C_8  and  O_9 
+REMARK    4  A    between atoms: C_11  and  O_12 
+REMARK    5  A    between atoms: O_12  and  P_13 
+REMARK    6  A    between atoms: N_17  and  C_18 
+REMARK    7  A    between atoms: C_18  and  C_19 
+REMARK    8  A    between atoms: C_18  and  C_22 
+REMARK    9  A    between atoms: C_22  and  S_23 
+REMARK   10  A    between atoms: S_23  and  CG_24 
+REMARK   11  A    between atoms: CG_24  and  CB_25 
+REMARK   12  A    between atoms: CB_25  and  CA_26 
+REMARK   13  A    between atoms: CA_26  and  N_27 
+REMARK   14  A    between atoms: CA_26  and  C_28 
+ROOT
+ATOM      1  C   CYT A          -1.958   2.150   1.201  0.00  0.00     0.161 C 
+ENDROOT
+BRANCH   1   2
+ATOM      2  N   CYT A          -0.541   2.468   1.173  0.00  0.00    -0.282 NA
+ATOM      3  C   PLP A           0.336   1.676   0.661  0.00  0.00     0.117 C 
+BRANCH   3   4
+ATOM      4  C   PLP A           1.803   2.018   0.612  0.00  0.00     0.031 A 
+ATOM      5  C   PLP A           2.770   0.988   0.367  0.00  0.00     0.008 A 
+ATOM      6  C   PLP A           4.130   1.324   0.323  0.00  0.00     0.118 A 
+ATOM      7  N   PLP A           4.541   2.595   0.513  0.00  0.00    -0.259 NA
+ATOM      8  C   PLP A           3.673   3.605   0.748  0.00  0.00     0.068 A 
+ATOM      9  C   PLP A           4.211   4.993   0.931  0.00  0.00     0.070 C 
+ATOM     10  C   PLP A           2.289   3.359   0.801  0.00  0.00     0.102 A 
+BRANCH   5  11
+ATOM     11  C   PLP A           2.447  -0.483   0.170  0.00  0.00     0.203 C 
+BRANCH  11  12
+ATOM     12  O   PLP A           3.095  -1.213   1.190  0.00  0.00    -0.350 OA
+BRANCH  12  13
+ATOM     13  P   PLP A           3.657  -2.743   0.554  0.00  0.00     0.060 P 
+ATOM     14  O   PLP A           4.831  -2.450  -0.420  0.00  0.00    -0.634 OA
+ATOM     15  O   PLP A           4.298  -3.740   1.821  0.00  0.00    -0.634 OA
+ATOM     16  O   PLP A           2.425  -3.583  -0.335  0.00  0.00    -0.634 OA
+ENDBRANCH  12  13
+ENDBRANCH  11  12
+ENDBRANCH   5  11
+BRANCH  10  17
+ATOM     17  O   PLP A           1.483   4.430   1.004  0.00  0.00    -0.358 OA
+ATOM     18  H   PLP A           0.525   4.449   0.956  0.00  0.00     0.218 HD
+ENDBRANCH  10  17
+ENDBRANCH   3   4
+ENDBRANCH   1   2
+BRANCH   1  19
+ATOM     19  C   CYT A          -2.560   2.195  -0.188  0.00  0.00     0.067 C 
+ATOM     20  O   CYT A          -3.737   1.914  -0.351  0.00  0.00    -0.548 OA
+ATOM     21  O   CYT A          -1.811   2.546  -1.253  0.00  0.00    -0.548 OA
+ENDBRANCH   1  19
+BRANCH   1  22
+ATOM     22  C   CYT A          -2.686   3.120   2.145  0.00  0.00     0.103 C 
+BRANCH  22  23
+ATOM     23  S   CYT A          -2.522   4.868   1.600  0.00  0.00    -0.159 SA
+BRANCH  23  24
+ATOM     24  CG  CYT A          -1.829   5.541   3.155  0.00  0.00     0.076 C 
+BRANCH  24  25
+ATOM     25  CB  CYT A          -2.850   5.868   4.266  0.00  0.00     0.071 C 
+BRANCH  25  26
+ATOM     26  CA  CYT A          -3.819   7.041   3.947  0.00  0.00     0.106 C 
+BRANCH  26  27
+ATOM     27  N   CYT A          -4.406   7.555   5.194  0.00  0.00     0.238 N 
+ATOM     28  H1  CYT A          -3.650   7.866   5.848  0.00  0.00     0.197 HD
+ATOM     29  H2  CYT A          -4.979   6.815   5.662  0.00  0.00     0.197 HD
+ATOM     30  H3  CYT A          -5.011   8.385   4.996  0.00  0.00     0.197 HD
+ENDBRANCH  26  27
+BRANCH  26  31
+ATOM     31  C   CYT A          -4.946   6.682   2.997  0.00  0.00     0.088 C 
+ATOM     32  O   CYT A          -5.178   5.404   2.640  0.00  0.00    -0.544 OA
+ATOM     33  OXT CYT A          -5.702   7.556   2.603  0.00  0.00    -0.544 OA
+ENDBRANCH  26  31
+ENDBRANCH  25  26
+ENDBRANCH  24  25
+ENDBRANCH  23  24
+ENDBRANCH  22  23
+ENDBRANCH   1  22
+TORSDOF 14

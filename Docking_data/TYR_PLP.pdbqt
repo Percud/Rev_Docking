@@ -1,0 +1,65 @@
+REMARK  10 active torsions:
+REMARK  status: ('A' for Active; 'I' for Inactive)
+REMARK    1  A    between atoms: C_5  and  C_6 
+REMARK    2  A    between atoms: C_6  and  O_7 
+REMARK    3  A    between atoms: O_7  and  P_8 
+REMARK    4  A    between atoms: C_12  and  C_13 
+REMARK    5  A    between atoms: N_14  and  C_15 
+REMARK    6  A    between atoms: C_15  and  C_16 
+REMARK    7  A    between atoms: C_15  and  C_23 
+REMARK    8  A    between atoms: C_16  and  C_17 
+REMARK    9  A    between atoms: C_20  and  O_28 
+REMARK   10  A    between atoms: C_26  and  O_27 
+ROOT
+ATOM      1  C   PLP A          -0.806   3.569  -3.695  0.00  0.00     0.070 C 
+ATOM      2  C   PLP A          -1.229   2.591  -2.635  0.00  0.00     0.068 A 
+ATOM      3  N   PLP A          -2.485   2.093  -2.710  0.00  0.00    -0.259 NA
+ATOM      4  C   PLP A          -2.976   1.218  -1.806  0.00  0.00     0.118 A 
+ATOM      5  C   PLP A          -2.189   0.780  -0.727  0.00  0.00     0.008 A 
+ATOM      6  C   PLP A          -0.853   1.272  -0.601  0.00  0.00     0.031 A 
+ATOM      7  C   PLP A          -0.375   2.199  -1.584  0.00  0.00     0.102 A 
+ENDROOT
+BRANCH   6   8
+ATOM      8  C   PLP A          -0.025   0.791   0.558  0.00  0.00     0.117 C 
+ATOM      9  N   TYR A           1.242   0.993   0.653  0.00  0.00    -0.283 NA
+BRANCH   9  10
+ATOM     10  C   TYR A           2.021   0.552   1.795  0.00  0.00     0.155 C 
+BRANCH  10  11
+ATOM     11  C   TYR A           3.525   0.671   1.487  0.00  0.00     0.069 C 
+BRANCH  11  12
+ATOM     12  C   TYR A           4.049  -0.256   0.399  0.00  0.00    -0.045 A 
+ATOM     13  C   TYR A           5.365  -0.207   0.098  0.00  0.00     0.006 A 
+ATOM     14  C   TYR A           5.944  -1.099  -0.935  0.00  0.00     0.033 A 
+ATOM     15  C   TYR A           5.160  -1.977  -1.589  0.00  0.00     0.071 A 
+ATOM     16  C   TYR A           3.714  -2.042  -1.273  0.00  0.00     0.033 A 
+ATOM     17  C   TYR A           3.185  -1.234  -0.338  0.00  0.00     0.006 A 
+BRANCH  15  18
+ATOM     18  O   TYR A           5.670  -2.804  -2.529  0.00  0.00    -0.361 OA
+ATOM     19  HH  TYR A           6.609  -2.803  -2.766  0.00  0.00     0.218 HD
+ENDBRANCH  15  18
+ENDBRANCH  11  12
+ENDBRANCH  10  11
+BRANCH  10  20
+ATOM     20  C   TYR A           1.668   1.392   2.997  0.00  0.00     0.066 C 
+ATOM     21  O   TYR A           1.834   2.602   2.977  0.00  0.00    -0.548 OA
+ATOM     22  O   TYR A           1.160   0.809   4.100  0.00  0.00    -0.548 OA
+ENDBRANCH  10  20
+ENDBRANCH   9  10
+ENDBRANCH   6   8
+BRANCH   5  23
+ATOM     23  C   PLP A          -2.765  -0.218   0.266  0.00  0.00     0.203 C 
+BRANCH  23  24
+ATOM     24  O   PLP A          -4.081  -0.594  -0.067  0.00  0.00    -0.350 OA
+BRANCH  24  25
+ATOM     25  P   PLP A          -4.587  -1.854   1.037  0.00  0.00     0.060 P 
+ATOM     26  O   PLP A          -4.630  -1.257   2.469  0.00  0.00    -0.634 OA
+ATOM     27  O   PLP A          -3.491  -3.201   1.053  0.00  0.00    -0.634 OA
+ATOM     28  O   PLP A          -6.199  -2.382   0.668  0.00  0.00    -0.634 OA
+ENDBRANCH  24  25
+ENDBRANCH  23  24
+ENDBRANCH   5  23
+BRANCH   7  29
+ATOM     29  O   PLP A           0.862   2.751  -1.561  0.00  0.00    -0.358 OA
+ATOM     30  H   PLP A           1.544   2.641  -0.894  0.00  0.00     0.218 HD
+ENDBRANCH   7  29
+TORSDOF 10
