@@ -95,20 +95,22 @@ my ($ligand_name,$ligand_dir,$ligand_ext)=fileparse($par{ligand}, qr/\.[^.]*/);
 
     
 foreach my $pdb (sort keys %coord){
-########## prepare receptor ##########
-    my ($receptor_name,$receptor_ext)=($1,$2) if ($pdb=~/(\S+)\.(\S+)/);
-    my $receptor="$receptor_name.pdbqt";
-    printf outlog "\n\n#### processing: %s ####\n",$receptor;
-    printf stderr "\n\n#### processing: %s ####\n",$receptor;
-    next if (!-e  "$par{receptor_dir}/$pdb"); 
-    $cmd="$prep_receptor -r $par{receptor_dir}/$pdb -o $receptor -e";
-    print outlog "\n$cmd\n";
-    my $error=system ($cmd); if ($error) { print outlog "**failed: $!"; warn "**failed: $!" };
+    for my $i (0 .. $#{ $coord{$pdb} }){
+		
+	########## prepare receptor ##########
+    	my ($receptor_name,$receptor_ext)=($1,$2) if ($pdb=~/(\S+)\.(\S+)/);
+    	my $receptor_name_chain=sprintf "%s.%s.",$receptor_name,$i;
+	my $receptor_chain="$receptor_name_chain.pdbqt";
+    	printf outlog "\n\n#### processing: %s ####\n",$receptor_chain;
+    	printf stderr "\n\n#### processing: %s ####\n",$receptor_chain;
+    	next if (!-e  "$par{receptor_dir}/$pdb"); 
+    	$cmd="$prep_receptor -r $par{receptor_dir}/$pdb -o $receptor_chain -e";
+    	print outlog "\n$cmd\n";
+    	my $error=system ($cmd); if ($error) { print outlog "**failed: $!"; warn "**failed: $!" };
     
 
-##########   prepare gpf   ##########
-    for my $i (0 .. $#{ $coord{$pdb} }){
-	    my $receptor_name_chain=sprintf "%s.%s.",$receptor_name,$i;
+	##########   prepare gpf   ##########
+
 	    $cmd="cp $par{gpf_par} ./reference.gpf";
 	    if (-e $par{gpf_par}){
 	      print outlog "\n$cmd\n";
@@ -117,7 +119,7 @@ foreach my $pdb (sort keys %coord){
 	    open(fp,">>reference.gpf") or die();
 	    printf fp "\ngridcenter %s\n", $coord{$pdb}[$i];
 	    close fp;
-	    $cmd="$prep_gpf4 -r $receptor -l $ligand -o $receptor_name_chain$ligand_name.gpf";
+	    $cmd="$prep_gpf4 -r $receptor_chain -l $ligand -o $receptor_name_chain$ligand_name.gpf";
 	    print outlog "\n$cmd\n";
 	    my $error=system ($cmd); if ($error) { print outlog "**failed: $!"; warn "**failed: $!" };        
 	##########       autogrid4   ##########
@@ -132,7 +134,7 @@ foreach my $pdb (sort keys %coord){
 	      }
 	    open(fp,">>reference.dpf") or die();
 	    close fp;
-	    $cmd="$prep_dpf4 -r $receptor -l $ligand -o $receptor_name_chain$ligand_name.dpf";
+	    $cmd="$prep_dpf4 -r $receptor_chain -l $ligand -o $receptor_name_chain$ligand_name.dpf";
 	    print outlog "\n$cmd\n";
 	    my $error=system ($cmd); if ($error) { print outlog "**failed: $!"; warn "**failed: $!"  };
 	    $cmd="sed -i 's/\#/\ \#/g' $receptor_name_chain$ligand_name.dpf"; #to compensate for a prepare_dpf4 bug
