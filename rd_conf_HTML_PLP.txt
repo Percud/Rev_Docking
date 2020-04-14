@@ -13,7 +13,7 @@ ligand           ./Docking_data/HTML_PLP.pdbqt           # ligand file
 gpf_par          ./Docking_data/reference.gpf            # autogrid4 format - edit to modify/add GPF parameters
 dpf_par          ./Docking_data/reference.dpf            # autodock4 format - edit to modify/add DPF parameters
 receptor_dir     ./Human/pdb                             # path to receptor pdb files
-coord_file       ./Human/Human_Orf_pred.coord            # table of gridcenter:  receptor_name1 x y z
+coord_file       ./Human/Human_Orf_pred_mini             # table of gridcenter:  receptor_name1 x y z
                                                          #                       receptor_name2 x y z
 outdir           ./Human/outdir_HTML_PLP                 # directory of results
 
