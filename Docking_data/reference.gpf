@@ -1,2 +1,2 @@
-npts 58 58 58                        # num.grid points in xyz
-
+npts 100 100 100                    # num.grid points in xyz
+spacing 0.2                         # spacing(A)
