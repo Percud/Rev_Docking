@@ -99,7 +99,7 @@ foreach my $pdb (sort keys %coord){
 		
 	########## prepare receptor ##########
     	my ($receptor_name,$receptor_ext)=($1,$2) if ($pdb=~/(\S+)\.(\S+)/);
-    	my $receptor_name_chain=sprintf "%s.%s.",$receptor_name,$i;
+    	my $receptor_name_chain=sprintf "%s.%s",$receptor_name,$i;
 	my $receptor_chain="$receptor_name_chain.pdbqt";
     	printf outlog "\n\n#### processing: %s ####\n",$receptor_chain;
     	printf stderr "\n\n#### processing: %s ####\n",$receptor_chain;
