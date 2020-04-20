@@ -104,8 +104,8 @@ foreach my $pdb (sort keys %coord){
 	my $receptor_chain="$receptor_name_chain.pdbqt";
 	my $chain;
 	my $K_resn;
-	#my $receptor_chain_flex="$receptor_name_chain_flex.pdbqt";
-	#my $receptor_chain_rigid="$receptor_name_chain_rigid.pdbqt";
+	my $receptor_chain_flex="$receptor_name_chain_flex.pdbqt";
+	my $receptor_chain_rigid="$receptor_name_chain_rigid.pdbqt";
     	printf outlog "\n\n#### processing: %s ####\n",$receptor_chain;
     	printf stderr "\n\n#### processing: %s ####\n",$receptor_chain;
     	next if (!-e  "$par{receptor_dir}/$pdb"); 
@@ -114,7 +114,7 @@ foreach my $pdb (sort keys %coord){
     	my $error=system ($cmd); if ($error) { print outlog "**failed: $!"; warn "**failed: $!" };
 	
 	########## prepare flex_receptor ##########
-    	$cmd="$prep_receptor -r $receptor_chain -s :$chain:LYS$K_resn ";
+    	$cmd="$prep_receptor -r $receptor_chain -s :$chain:LYS$K_resn -g $receptor_chain_rigid -x $receptor_chain_flex";
 
 	##########   prepare gpf   ##########
 
