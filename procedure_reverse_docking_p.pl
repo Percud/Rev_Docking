@@ -64,6 +64,7 @@ my $prep_ligand="$script/pythonsh $script/prepare_ligand4.py -A 'bonds_hydrogens
 my $prep_receptor="$script/pythonsh $script/prepare_receptor4.py -A 'checkhydrogens' -e ";
 my $prep_gpf4="$script/pythonsh $script/prepare_gpf4.py -i reference.gpf";
 my $prep_dpf4="$script/pythonsh $script/prepare_dpf42.py -i reference.dpf";
+my $prep_flexreceptor4="$script/pythonsh $script/prep_flexreceptor4 -P CA_CB_CG_CD";
 #######################################
 
 
@@ -73,7 +74,7 @@ my %coord;
 while(my $line=<fp>){
     next if ($line=~/^#/); #skip comments
  
-    my($name,$x,$y,$z)=split /\s+/, $line;
+    my($name,$K_resn,$chain,$x,$y,$z)=split /\s+/, $line;
     push @{$coord{$name}}, "$x $y $z" if($name);
 }
 
@@ -101,13 +102,17 @@ foreach my $pdb (sort keys %coord){
     	my ($receptor_name,$receptor_ext)=($1,$2) if ($pdb=~/(\S+)\.(\S+)/);
     	my $receptor_name_chain=sprintf "%s.%s",$receptor_name,$i;
 	my $receptor_chain="$receptor_name_chain.pdbqt";
+	my $receptor_chain_flex="$receptor_name_chain_flex.pdbqt";
+	my $receptor_chain_rigid="$receptor_name_chain_rigid.pdbqt";
     	printf outlog "\n\n#### processing: %s ####\n",$receptor_chain;
     	printf stderr "\n\n#### processing: %s ####\n",$receptor_chain;
     	next if (!-e  "$par{receptor_dir}/$pdb"); 
     	$cmd="$prep_receptor -r $par{receptor_dir}/$pdb -o $receptor_chain -e";
     	print outlog "\n$cmd\n";
     	my $error=system ($cmd); if ($error) { print outlog "**failed: $!"; warn "**failed: $!" };
-    
+	
+	########## prepare flex_receptor ##########
+    	$cmd="$prep_receptor -r $receptor_chain -s :$chain:LYS$K_resn -g $receptor_chain_rigid -x $receptor_chain_flex";
 
 	##########   prepare gpf   ##########
 
@@ -119,7 +124,7 @@ foreach my $pdb (sort keys %coord){
 	    open(fp,">>reference.gpf") or die();
 	    printf fp "\ngridcenter %s\n", $coord{$pdb}[$i];
 	    close fp;
-	    $cmd="$prep_gpf4 -r $receptor_chain -l $ligand -o $receptor_name_chain$ligand_name.gpf";
+	    $cmd="$prep_gpf4 -r $receptor_chain_rigid -l $ligand -o $receptor_name_chain$ligand_name.gpf -x $receptor_chain_flex";
 	    print outlog "\n$cmd\n";
 	    my $error=system ($cmd); if ($error) { print outlog "**failed: $!"; warn "**failed: $!" };        
 	##########       autogrid4   ##########
@@ -134,7 +139,7 @@ foreach my $pdb (sort keys %coord){
 	      }
 	    open(fp,">>reference.dpf") or die();
 	    close fp;
-	    $cmd="$prep_dpf4 -r $receptor_chain -l $ligand -o $receptor_name_chain$ligand_name.dpf";
+	    $cmd="$prep_dpf4 -r $receptor_chain_rigid -x $receptor_chain_flex -l $ligand -o $receptor_name_chain$ligand_name.dpf";
 	    print outlog "\n$cmd\n";
 	    my $error=system ($cmd); if ($error) { print outlog "**failed: $!"; warn "**failed: $!"  };
 	    $cmd="sed -i 's/\#/\ \#/g' $receptor_name_chain$ligand_name.dpf"; #to compensate for a prepare_dpf4 bug
