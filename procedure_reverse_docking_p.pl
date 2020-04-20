@@ -114,7 +114,7 @@ foreach my $pdb (sort keys %coord){
     	my $error=system ($cmd); if ($error) { print outlog "**failed: $!"; warn "**failed: $!" };
 	
 	########## prepare flex_receptor ##########
-    	$cmd="$prep_receptor -r $receptor_chain -s :$chain:LYS$K_resn -g $receptor_chain_rigid -x $receptor_chain_flex";
+    	$cmd="$prep_receptor -r $receptor_chain -s :$chain:LYS$K_resn ";
 
 	##########   prepare gpf   ##########
 
