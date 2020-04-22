@@ -62,20 +62,21 @@ my $script=$par{script_path};
 ############### calls to scripts #####
 my $prep_ligand="$script/pythonsh $script/prepare_ligand4.py -A 'bonds_hydrogens' -U 'nphs' -l $par{ligand}";
 my $prep_receptor="$script/pythonsh $script/prepare_receptor4.py -A 'checkhydrogens' -e ";
+my $prep_flexreceptor4="$script/pythonsh $script/prep_flexreceptor4 -P CA_CB_CG_CD";
 my $prep_gpf4="$script/pythonsh $script/prepare_gpf4.py -i reference.gpf";
 my $prep_dpf4="$script/pythonsh $script/prepare_dpf42.py -i reference.dpf";
-my $prep_flexreceptor4="$script/pythonsh $script/prep_flexreceptor4 -P CA_CB_CG_CD";
 #######################################
 
 
 ############### read coordinates #####
 open(fp,"<$par{coord_file}") or die();
-my %coord;
+my (%coord,%Kr);
 while(my $line=<fp>){
     next if ($line=~/^#/); #skip comments
  
     my($name,$K_resn,$chain,$x,$y,$z)=split /\s+/, $line;
     push @{$coord{$name}}, "$x $y $z" if($name);
+    push @{$Kr{$name}}, "$K_resn $chain" if($name);
 }
 
 my $cmd;
@@ -114,7 +115,8 @@ foreach my $pdb (sort keys %coord){
     	my $error=system ($cmd); if ($error) { print outlog "**failed: $!"; warn "**failed: $!" };
 	
 	########## prepare flex_receptor ##########
-    	$cmd="$prep_receptor -r $receptor_chain -s :$chain:LYS$K_resn -g $receptor_chain_rigid -x $receptor_chain_flex";
+    	my($K_res, $K_chain)=split /\s+/, $Kr{$pdb}[$i];
+	$cmd="$prep_receptor -r $receptor_chain -s :$chain:LYS$K_resn -g $receptor_chain_rigid -x $receptor_chain_flex";
 
 	##########   prepare gpf   ##########
 
@@ -125,6 +127,7 @@ foreach my $pdb (sort keys %coord){
 	      }
 	    open(fp,">>reference.gpf") or die();
 	    printf fp "\ngridcenter %s\n", $coord{$pdb}[$i];
+	    
 	    close fp;
 	    $cmd="$prep_gpf4 -r $receptor_chain_rigid -l $ligand -o $receptor_name_chain$ligand_name.gpf -x $receptor_chain_flex";
 	    print outlog "\n$cmd\n";
