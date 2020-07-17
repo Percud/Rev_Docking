@@ -8,11 +8,11 @@ Coinceived for a High Performance Computer (HPC) cluster
 
 ### Prerequisites
 
-AutoDock >=4.2.6
+AutoDock, AutoGrid >=4.2.6
 
 Mgltools >=1.5.6
 
-Perl, Phyton, linux
+Perl, Python, linux
 
 
 ## Example
