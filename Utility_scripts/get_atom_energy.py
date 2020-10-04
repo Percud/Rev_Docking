@@ -5,9 +5,10 @@
 
 import glob, re, sys, os, pandas as pd
 
-RES = str(sys.argv[1])
+RES = str(sys.argv[1]) ## three-letter code of selected ligand atom
 dlg_dir = sys.argv[2]
 
+## print header of table
 print('dlg file', 'Ligand', 'BC (kcal/mol)', 'Run', 'LC (kcal/mol)', 'Run', 'BCaa (kcal/mol)', 'Run', 'LCaa (kcal/mol)', 'Run', 'LCaaB (kcal/mol)', 'Run', 'LCaaM (kcal/mol)', 'BB (kcal/mol)', 'Run', 'LC', 'Num in LC', sep = '\t', file=open(dlg_dir+dlg_dir.split('/')[-2]+'.tsv', 'w')) # tab headers
 for dlg in glob.glob(dlg_dir+'/*.dlg'):
     try:
