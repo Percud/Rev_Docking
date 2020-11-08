@@ -5,16 +5,15 @@
 ###
 
 ## MGL_ROOT environmental variable - path to mgltools   
-MGL_ROOT = /hpc/share/applications/mgltools/1.5.6
+MGL_ROOT = /home/lab83bio/program/mgltools_x86_64Linux2_1.5.6
 script_path = ./Autodock_scripts                  # path to python scripts
 
 # Specific 'input/output files'
-ligand = ./Docking_data/HIS_PLP.pdbqt             # ligand file
+ligand = ./Docking_data/HTML_PLP.pdbqt            # ligand file
 gpf_par = ./Docking_data/reference.gpf            # autogrid4 format - edit to modify/add GPF parameters
 dpf_par = ./Docking_data/reference.dpf            # autodock4 format - edit to modify/add DPF parameters
 receptor_dir = ./Mouse/pdb                        # path to receptor pdb files
 coord_file = ./Mouse/Mouse_Orf_pred.coord         # table of gridcenter:  receptor_name1 x y z
                                                   #                       receptor_name2 x y z
-outdir = ./Mouse/HIS_PLP_Mouse                   # directory of results
-processes = 200
+outdir = ./Mouse/outdir_HTML_PLP                  # directory of results
 
