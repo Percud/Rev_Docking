@@ -9,30 +9,46 @@ cwd = os.getcwd()
 config = configparser.ConfigParser(inline_comment_prefixes="#")
 config.optionxform = str
 config.read(sys.argv[1])
-locals().update(dict(config.items('DEFAULT')))
+locals().update(dict(config.items('DOCKING')))
 
 ####    call to scripts    ####
-pythonsh = MGL_ROOT+'/bin/pythonsh '
+pythonsh = MGL_ROOT+'/bin/pythonsh'
 u24 = MGL_ROOT+'/MGLToolsPckgs/AutoDockTools/Utilities24/'
 def prepare_receptor(inf,outf):
-    os.system(pythonsh+u24+'prepare_receptor4.py -A "checkhydrogens" -e -r '+inf+' -o '+outf)
-def prepare_gpf(receptor, ligand, output):
+    subprocess.run([pythonsh,u24+'prepare_receptor4.py',
+                    '-A "checkhydrogens" -e',
+                    '-r',inf,
+                    '-o',outf])
+def prepare_gpf(receptor, ligand, coord, output):
     os.chdir(out_dir)
-    os.system(pythonsh+u24+'prepare_gpf4.py -r '+receptor+' -l '+ligand+' -o '+output)
+    subprocess.run([pythonsh,u24+'prepare_gpf4.py', 
+                   '-l',ligand,
+                   ' '.join(['-p '+'='.join(i) for i in config.items('GPF')]),
+                   '-p gridcenter='+coord,
+                   '-r',receptor,
+                   '-o',output])
     os.chdir(cwd)
-def prepare_dpf(receptor, ligand, output):    
+def prepare_dpf(receptor, ligand, output):
     os.chdir(out_dir)
-    os.system(pythonsh+u24+'prepare_dpf4.py -i reference.dpf -r '+receptor+' -l '+ligand+' -o '+output)
+    subprocess.run([pythonsh,u24+'prepare_dpf4.py', 
+                   '-l',ligand,
+                   ' '.join(['-p '+'='.join(i) for i in config.items('DPF')]),
+                   '-r',receptor,
+                   '-o',output])
     os.chdir(cwd)
 def autogrid(gpf, glg):
     os.chdir(out_dir)
-    os.system('autogrid4 -p '+gpf+' -l '+glg)
+    subprocess.run(['autogrid4',
+                    '-p',gpf,
+                    '-l',glg])
     os.chdir(cwd)
 def autodock(dpf, dlg):
     os.chdir(out_dir)
-    os.system('autodock4 -p '+dpf+' -l '+dlg)
+    subprocess.run(['autodock4',
+                    '-p',dpf,
+                    '-l',dlg])
     os.chdir(cwd)
-
+    
 ####   make outdir   ####
 i = 1
 while os.path.exists(outdir+'_%s' % i):
@@ -68,23 +84,24 @@ def reverse_docking(pdb):
     for c in xyz:
         
         ####    prepare receptor, gpf and dpf  ####
-        os.system('cp '+dpf_par+' '+out_dir)
-
-        dpf = out_dir+os.path.basename(dpf_par) # define new path
-
         i=1
         while os.path.exists(out_dir+pdb_name+'_%s.pdbqt' %i):
             i += 1 # incrementing file number
 
-        print(re.sub('HETATM', '#HETATM', open(receptor_dir+'/'+pdb, 'r').read()), file=open(out_dir+pdb, 'w')) # comment HETATM in pdb file
+        print(re.sub('HETATM', '#HETATM', open(receptor_dir+'/'+pdb, 'r').read()), 
+              file=open(out_dir+pdb, 'w')) # comment HETATM in pdb file
         prepare_receptor(out_dir+pdb, out_dir+pdb_name+'_%s.pdbqt' %i)
-        prepare_gpf(pdb_name+'_%s.pdbqt' %i, os.path.basename(ligand), pdb_name+'_%s.gpf' % i)
-        prepare_dpf(pdb_name+'_%s.pdbqt' %i, os.path.basename(ligand), pdb_name+'_'+lig_name+'_%s.dpf' % i)
+        prepare_gpf(pdb_name+'_%s.pdbqt' %i, 
+                    os.path.basename(ligand), 
+                    ','.join(c), 
+                    pdb_name+'_%s.gpf' % i)
+        prepare_dpf(pdb_name+'_%s.pdbqt' %i, 
+                    os.path.basename(ligand), 
+                    pdb_name+'_'+lig_name+'_%s.dpf' % i)
 
-        ## solve bug space in dpf  and set parameter in gpf##
-        print(re.sub('gridcenter auto', 'gridcenter '+' '.join(map(str,c)), open(out_dir+pdb_name+'_%s.gpf' % i).read()), file=open(out_dir+pdb_name+'_%s.gpf' % i, 'w'))
-        print(re.sub('npts 40 40 40', 'npts 55 55 55', open(out_dir+pdb_name+'_%s.gpf' % i).read()), file=open(out_dir+pdb_name+'_%s.gpf' % i, 'w'))
-        print(re.sub('#', ' #', open(out_dir+pdb_name+'_'+lig_name+'_%s.dpf' % i).read()), file=open(out_dir+pdb_name+'_'+lig_name+'_%s.dpf' % i, 'w'))
+        ## solve bug space in dpf ##
+        print(re.sub('#', ' #', open(out_dir+pdb_name+'_'+lig_name+'_%s.dpf' % i).read()), 
+              file=open(out_dir+pdb_name+'_'+lig_name+'_%s.dpf' % i, 'w'))
 
         ####    autogrid    ####
         autogrid(pdb_name+'_%s.gpf' % i, pdb_name+'_%s.glg' % i)
@@ -94,7 +111,7 @@ def reverse_docking(pdb):
 
 ####    multiprocessing    ####
 if __name__ == '__main__':
-    pool = Pool(processes)                       # Create a multiprocessing Pool
+    pool = Pool(int(processes))                       # Create a multiprocessing Pool
     pool.map(reverse_docking,coordinates)  # process data_inputs iterable with pool
     
 
