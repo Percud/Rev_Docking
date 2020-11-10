@@ -1,16 +1,15 @@
-[DOCKING]
 ### Configuration file for the reverse docking procedure ###
 ### change file names according with your paths ####
 
+[DOCKING]
+
 # MGL_ROOT environmental variable - path to mgltools   
 MGL_ROOT = /home/marco/MGLTools-1.5.6
-
-# Specific input/output files
-ligand = ./Docking_data/HTML_PLP.pdbqt            # ligand file
-receptor_dir = ./Mouse/pdb                        # path to receptor pdb files
-coord_file = ./Mouse/Mouse_Orf_pred_mini.coord          # table of gridcenter:  receptor_name1 x y z
-outdir = ./Mouse/outdir_HTML_PLP                  # directory of results (if exist, add progressive number)
-processes=5                                       # number of processes of multiprocessing
+ligand = ./Docking_data/HTML_PLP.pdbqt
+receptor_dir = ./Mouse/pdb                          # path to receptor pdb files
+coord_file = ./Mouse/Mouse_Orf_pred_mini.coord      # table of gridcenter:  receptor_name1 x y z
+outdir = ./Mouse/outdir_HTML_PLP
+processes = 5                                       # number of processes of multiprocessing
 
 [GPF]
 npts=55,55,55 
