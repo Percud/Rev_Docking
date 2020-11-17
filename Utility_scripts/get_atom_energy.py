@@ -17,7 +17,7 @@ print('dlg file', 'Ligand',
       'BCaa (kcal/mol)', 'Run', 'LCaa (kcal/mol)','Run', 
       'BCM (kcal/mol)', 'LCM (kcal/mol)', 
       'BCaaM (kcal/mol)', 'LCaaM (kcal/mol)',
-      'LC', 'Num in LC', 
+      'LC', 'Num in LC', '1LC/2LC %',
       sep = '\t',
       file=open(dlg_dir+dlg_dir.split('/')[-2]+'.tsv', 'w')) # tab headers
 
@@ -61,12 +61,14 @@ for dlg in glob.glob(dlg_dir+'/*.dlg'):
                     df['vdw+Elec'].idxmin()[1])
         largest_cluster = df['subrank'].idxmax()[0]
         largest_cluster_num = df['subrank'].max()
+        second_largest_cluster_num = pd.DataFrame(bo.count().sort_values('subrank',ascending=False)).loc[2,'subrank']
+        ratio_num_LC=round(second_largest_cluster_num/largest_cluster_num*100,2)
         print(os.path.basename(dlg), RES, 
               *best_energy, *largest_energy, 
               *best_res, *largest_res, 
               mean_best, mean_largest,
               mean_best_res, mean_largest_res,
-              largest_cluster, largest_cluster_num, 
+              largest_cluster, largest_cluster_num, ratio_num_LC,
               sep = '\t', file=open(dlg_dir+dlg_dir.split('/')[-2]+'.tsv', 'a'))
     except:
         print(os.path.basename(dlg), sep = '\t', file=open(dlg_dir+dlg_dir.split('/')[-2]+'.tsv', 'a'))
