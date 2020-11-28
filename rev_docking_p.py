@@ -93,7 +93,7 @@ def reverse_docking(pdb):
         prepare_receptor(out_dir+pdb, out_dir+pdb_name+'_%s.pdbqt' %i)
         prepare_gpf(pdb_name+'_%s.pdbqt' %i, 
                     os.path.basename(ligand), 
-                    ','.join(c), 
+                    ','.join(map(str,c)), 
                     pdb_name+'_%s.gpf' % i)
         prepare_dpf(pdb_name+'_%s.pdbqt' %i, 
                     os.path.basename(ligand), 
