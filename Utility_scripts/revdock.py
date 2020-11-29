@@ -8,6 +8,7 @@ def convert(query, subject, num):
     """return number of subject fasta given a query number in dict format"""
     num=int(num)
     blastp(query=query, subject=subject, out=query+'_'+subject+'.xml', outfmt=5, max_hsps=1)()
+    blastp(query=query, subject=subject, out=query+'_'+subject+'.txt', max_hsps=1)()
     xml = SearchIO.read(query+'_'+subject+'.xml', "blast-xml")
     d={}
     for n in range(len(xml)):
@@ -18,9 +19,13 @@ def convert(query, subject, num):
         q_gap = np.array([index for index, value in enumerate(q) if value == '-'])
         hit[:] = (value for value in hit if value != '-')
         q[:] = (value for value in q if value != '-')
-        sub=(num -len(hit_gap[hit_gap<num])+len(q_gap[q_gap<num])-x.query_start+x.hit_start)
-        names=(xml[n].description)
-        d.setdefault(names,sub)
+        sub=(num -len(hit_gap[hit_gap<num-x.query_start+x.hit_start])+len(q_gap[q_gap<num])-x.query_start+x.hit_start)
+        name=(xml[n].description)
+        if num-1 in hit_gap+x.query_start-x.hit_start:
+            sub=None
+            d.setdefault(name,{num:q[num-1],sub:sub})
+        else:
+            d.setdefault(name,{num:q[num-1],sub:hit[sub-1]})
     os.remove(query+'_'+subject+'.xml')
     return(d)
 
