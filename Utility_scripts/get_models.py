@@ -38,7 +38,7 @@ cwd=os.getcwd()
 
 ## MOUSE PLPome          
 ncbi_acc=pd.read_csv('http://bioinformatics.unipr.it/B6db/tmp/Mus_musculus.tab',sep='\t',header=None)[2].tolist()
-accession=convert_ac(ncbi_acc,'P_REFSEQ_AC','ACC').To.tolist()
+accession=convert_ac(ncbi_acc,'P_REFSEQ_AC','ACC').head().To.tolist()
 get_models(accession,'10090','Mouse_PLP_swissmodel')
 
 ## Get coord from catalytic lysine
@@ -62,12 +62,12 @@ for pdb in glob.glob('*.pdb'):
         print('>'+id+'\n'+uni['sequence.sequence'].values[0], file=open(id+'.fasta', 'w'))
         lys = features[(features.category == 'PTM')&(features.description.str.contains('pyridoxal'))].begin.dropna().tolist()[0]
         for k,v in convert(id+'.fasta', fa, lys).items():
-            coord=tuple(structure[k][v]['NZ'].get_coord())
+            coord=tuple(structure[k][list(v.keys())[1]]['NZ'].get_coord())
             output.append([pdb,k,v,*coord])
     except:
         output.append([pdb])
     os.remove(fa)
     os.remove(id+'.fasta')
 
-pd.DataFrame(output, columns=['pdb','chain','res','x','y','z']).to_csv('Mouse_coord.csv',index=False)
+pd.DataFrame(output, columns=['pdb','chain','res','x','y','z']).to_csv('Mouse_coord.csv',sep='\t',index=False)
 os.chdir(cwd)
