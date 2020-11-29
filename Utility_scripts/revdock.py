@@ -23,9 +23,9 @@ def convert(query, subject, num):
         name=(xml[n].description)
         if num-1 in hit_gap+x.query_start-x.hit_start:
             sub=None
-            d.setdefault(name,{num:q[num-1],sub:sub})
+            d.setdefault(name,{num:sub,q[num-1]:sub})
         else:
-            d.setdefault(name,{num:q[num-1],sub:hit[sub-1]})
+            d.setdefault(name,{num:sub,q[num-1]:hit[sub-1]})
     os.remove(query+'_'+subject+'.xml')
     return(d)
 
