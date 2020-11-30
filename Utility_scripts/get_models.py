@@ -28,9 +28,9 @@ for pdb in glob.glob('*.pdb'):
         features = pd.DataFrame(uni.features[0])
         print('>'+id+'\n'+uni['sequence.sequence'].values[0], file=open(id+'.fasta', 'w'))
         lys = features[(features.category == 'PTM')&(features.description.str.contains('pyridoxal'))].begin.dropna().tolist()[0]
-        for k,v in convert(id+'.fasta', fa, lys).items():
-            coord=tuple(structure[k][list(v.values())[0]]['NZ'].get_coord())
-            output.append([pdb,k,list(v.values())[0],*coord])
+        for row in convert(id+'.fasta', fa, [lys]):
+            coord=tuple(structure[row['sequence']][row['hit_num']]['NZ'].get_coord())
+            output.append([pdb,row['sequence'],row['hit_num'],*coord])
     except:
         output.append([pdb])
     os.remove(fa)
@@ -64,9 +64,9 @@ for pdb in glob.glob('*.pdb'):
         features = pd.DataFrame(uni.features[0])
         print('>'+id+'\n'+uni['sequence.sequence'].values[0], file=open(id+'.fasta', 'w'))
         lys = features[(features.category == 'PTM')&(features.description.str.contains('pyridoxal'))].begin.dropna().tolist()[0]
-        for k,v in convert(id+'.fasta', fa, lys).items():
-            coord=tuple(structure[k][list(v.values())[0]]['NZ'].get_coord())
-            output.append([pdb,k,list(v.values())[0],*coord])
+        for row in convert(id+'.fasta', fa, [lys]):
+            coord=tuple(structure[row['sequence']][row['hit_num']]['NZ'].get_coord())
+            output.append([pdb,row['sequence'],row['hit_num'],*coord])
     except:
         output.append([pdb])
     os.remove(fa)
