@@ -4,30 +4,29 @@ from Bio.Blast import NCBIXML
 from Bio import SeqIO, SearchIO
 from Bio.PDB import PDBParser as PDB, PDBIO
 
-def convert(query, subject, num):
-    """return number of subject fasta given a query number in dict format"""
-    num=int(num)
+def convert(query,subject,num=None):
+    """return dataframe of position matching in subject and query fasta, or a dictionary given a list of number"""
+    df=[]
     blastp(query=query, subject=subject, out=query+'_'+subject+'.xml', outfmt=5, max_hsps=1)()
-    blastp(query=query, subject=subject, out=query+'_'+subject+'.txt', max_hsps=1)()
     xml = SearchIO.read(query+'_'+subject+'.xml', "blast-xml")
-    d={}
     for n in range(len(xml)):
         x=xml[n][0]
-        hit=list('X'*x.hit_start)+list(x.hit)
-        q=list('X'*x.query_start)+list(x.query)
-        hit_gap = np.array([index for index, value in enumerate(hit) if value == '-'])
-        q_gap = np.array([index for index, value in enumerate(q) if value == '-'])
-        hit[:] = (value for value in hit if value != '-')
-        q[:] = (value for value in q if value != '-')
-        sub=(num -len(hit_gap[hit_gap<num-x.query_start+x.hit_start])+len(q_gap[q_gap<num])-x.query_start+x.hit_start)
-        name=(xml[n].description)
-        if num-1 in hit_gap+x.query_start-x.hit_start:
-            sub=None
-            d.setdefault(name,{num:sub,q[num-1]:sub})
-        else:
-            d.setdefault(name,{num:sub,q[num-1]:hit[sub-1]})
+        hit_gap = np.array([index for index, value in enumerate(x.hit) if value == '-'])
+        q_gap = np.array([index for index, value in enumerate(x.query) if value == '-'])
+        hit_num=list(np.arange(x.hit_start+1,x.hit_end+1))
+        q_num=list(np.arange(x.query_start+1,x.query_end+1))
+        for i in hit_gap:
+            hit_num.insert(i,'-')
+        for i in q_gap:
+            q_num.insert(i,'-')
+        df.append(list(zip(len(x.query)*[query],len(x.query)*xml[n].description,x.query,q_num,x.hit,hit_num)))
+    df = pd.DataFrame([j for i in df for j in i],columns=['query','sequence','query_res','query_num','hit_res','hit_num'])
+    df.set_index(['query'],inplace=True)
     os.remove(query+'_'+subject+'.xml')
-    return(d)
+    if num==None:
+        return df
+    else:
+        return df[df.query_num.isin(list(map(int,num)))].to_dict('records')
 
 def convert_ac(list,From,to):
     """convert accession list"""
@@ -79,7 +78,7 @@ def get_models(list,taxid,out):
         try:
             wget.download(url)
         except:
-            with open('downlod.log','a') as log:
+            with open('download.log','a') as log:
                 print(url, 'Not found',file=log)
     os.chdir(cwd)
     
