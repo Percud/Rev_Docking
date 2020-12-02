@@ -6,7 +6,7 @@
 MGL_ROOT = /home/marco/MGLTools-1.5.6               # MGL_ROOT environmental variable - path to mgltools   
 ligand = ./Docking_data/HTML_PLP.pdbqt
 receptor_dir = ./Mouse/pdb                          # path to receptor pdb files
-coord_file = ./Mouse/Mouse_Orf_pred_mini.coord      # table of gridcenter:  receptor_name1 x y z
+coord_file = ./Mouse/Mouse_Orf_pred_mini.coord      # table of gridcenter:  receptor_name1 chain res_num x y z
 outdir = ./Mouse/outdir_HTML_PLP
 processes = 5                                       # number of processes of multiprocessing
 
