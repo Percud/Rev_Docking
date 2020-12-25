@@ -13,8 +13,8 @@ except:
     
 ## print header of table
 print('dlg file', 'Ligand', 
-      'BC (kcal/mol)', 'Run', 'LC (kcal/mol)', 'Run', 
-      'BCaa (kcal/mol)', 'Run', 'LCaa (kcal/mol)','Run', 
+      'BCB (kcal/mol)', 'Run', 'LCB (kcal/mol)', 'Run', 
+      'BCaaB (kcal/mol)', 'Run', 'LCaaB (kcal/mol)', 'Run', 
       'BCM (kcal/mol)', 'LCM (kcal/mol)', 
       'BCaaM (kcal/mol)', 'LCaaM (kcal/mol)',
       'LC', 'Num in LC', '1LC/2LC %',
