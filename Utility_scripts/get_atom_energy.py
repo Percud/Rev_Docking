@@ -13,8 +13,8 @@ except:
     
 ## print header of table
 print('dlg file', 'Ligand', 
-      'BC (kcal/mol)', 'Run', 'LC (kcal/mol)', 'Run', 
-      'BCaa (kcal/mol)', 'Run', 'LCaa (kcal/mol)','Run', 
+      'BCB (kcal/mol)', 'Run', 'LCB (kcal/mol)', 'Run', 
+      'BCaaB (kcal/mol)', 'Run', 'LCaaB (kcal/mol)', 'Run', 
       'BCM (kcal/mol)', 'LCM (kcal/mol)', 
       'BCaaM (kcal/mol)', 'LCaaM (kcal/mol)',
       'LC', 'Num in LC', '1LC/2LC %',
@@ -65,7 +65,7 @@ for dlg in glob.glob(dlg_dir+'/*.dlg'):
             second_largest_cluster_num = pd.DataFrame(bo.count().sort_values('subrank',ascending=False)).loc[2,'subrank']
         except:
             second_largest_cluster_num = 0
-        ratio_num_LC=round(100-(second_largest_cluster_num/largest_cluster_num*100),2)
+        ratio_num_LC=round((1-(second_largest_cluster_num/largest_cluster_num))*100,2)
         print(os.path.basename(dlg), RES, 
               *best_energy, *largest_energy, 
               *best_res, *largest_res, 

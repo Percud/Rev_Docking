@@ -16,9 +16,9 @@ def convert(query,subject,num=None):
         hit_num=list(np.arange(x.hit_start+1,x.hit_end+1))
         q_num=list(np.arange(x.query_start+1,x.query_end+1))
         for i in hit_gap:
-            hit_num.insert(i,'-')
+            hit_num.insert(i,np.nan)
         for i in q_gap:
-            q_num.insert(i,'-')
+            q_num.insert(i,np.nan)
         df.append(list(zip(len(x.query)*[query],len(x.query)*xml[n].description,x.query,q_num,x.hit,hit_num)))
     df = pd.DataFrame([j for i in df for j in i],columns=['query','sequence','query_res','query_num','hit_res','hit_num'])
     df.set_index(['query'],inplace=True)
