@@ -65,7 +65,7 @@ for dlg in glob.glob(dlg_dir+'/*.dlg'):
             second_largest_cluster_num = pd.DataFrame(bo.count().sort_values('subrank',ascending=False)).loc[2,'subrank']
         except:
             second_largest_cluster_num = 0
-        ratio_num_LC=round(100-(second_largest_cluster_num/largest_cluster_num*100),2)
+        ratio_num_LC=round((1-(second_largest_cluster_num/largest_cluster_num))*100,2)
         print(os.path.basename(dlg), RES, 
               *best_energy, *largest_energy, 
               *best_res, *largest_res, 
