@@ -4,7 +4,7 @@ from Bio.Blast import NCBIXML
 from Bio import SeqIO, SearchIO
 from Bio.PDB import PDBParser as PDB, PDBIO
 
-def convert(query,subject,num=None):
+def match_fasta_position(query,subject,num=None):
     """return dataframe of position matching in subject and query fasta, or a dictionary given a list of number"""
     df=[]
     blastp(query=query, subject=subject, out=query+'_'+subject+'.xml', outfmt=5, max_hsps=1)()
