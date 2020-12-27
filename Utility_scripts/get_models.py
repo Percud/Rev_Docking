@@ -1,4 +1,3 @@
-#!/home/marco/anaconda3/bin/python3
 from revdock import *
 
 cwd=os.getcwd()
@@ -28,15 +27,15 @@ for pdb in glob.glob('*.pdb'):
         features = pd.DataFrame(uni.features[0])
         print('>'+id+'\n'+uni['sequence.sequence'].values[0], file=open(id+'.fasta', 'w'))
         lys = features[(features.category == 'PTM')&(features.description.str.contains('pyridoxal'))].begin.dropna().tolist()[0]
-        for row in match_fasta_position(id+'.fasta', fa, [lys]):
+        for row in convert(id+'.fasta', fa, [lys]):
             coord=tuple(structure[row['sequence']][row['hit_num']]['NZ'].get_coord())
-            output.append([pdb,row['sequence'],row['hit_num'],*coord])
+            output.append([id,pdb,lys,row['sequence'],row['hit_num'],*coord])
     except:
-        output.append([pdb])
+        output.append([id,pdb])
     os.remove(fa)
     os.remove(id+'.fasta')
 
-pd.DataFrame(output, columns=['pdb','chain','res','x','y','z']).to_csv('Human_coord.csv',sep='\t',index=False)
+pd.DataFrame(output, columns=['uniprot_ac','pdb','lys','chain','res','x','y','z']).to_csv('Human_coord.csv',sep='\t',index=False)
 os.chdir(cwd)
 
 ## MOUSE PLPome          
@@ -64,13 +63,13 @@ for pdb in glob.glob('*.pdb'):
         features = pd.DataFrame(uni.features[0])
         print('>'+id+'\n'+uni['sequence.sequence'].values[0], file=open(id+'.fasta', 'w'))
         lys = features[(features.category == 'PTM')&(features.description.str.contains('pyridoxal'))].begin.dropna().tolist()[0]
-        for row in match_fasta_position(id+'.fasta', fa, [lys]):
+        for row in convert(id+'.fasta', fa, [lys]):
             coord=tuple(structure[row['sequence']][row['hit_num']]['NZ'].get_coord())
-            output.append([pdb,row['sequence'],row['hit_num'],*coord])
+            output.append([id,pdb,lys,row['sequence'],row['hit_num'],*coord])
     except:
-        output.append([pdb])
+        output.append([id,pdb])
     os.remove(fa)
     os.remove(id+'.fasta')
 
-pd.DataFrame(output, columns=['pdb','chain','res','x','y','z']).to_csv('Mouse_coord.csv',sep='\t',index=False)
+pd.DataFrame(output, columns=['uniprot_ac','pdb','lys','chain','res','x','y','z']).to_csv('Mouse_coord.csv',sep='\t',index=False)
 os.chdir(cwd)
