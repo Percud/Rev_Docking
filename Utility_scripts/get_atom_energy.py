@@ -9,7 +9,10 @@ try:
     RES = str(sys.argv[1]) ## three-letter code of selected ligand atom
     dlg_dir = sys.argv[2]
 except:
-    print('USAGE: ./get_atom_energy.py MY_RES_IN_LIGAND MY_DLG_DIRECTORY')
+    print('Returns a Dataframe.tsv given a three-letter code of the ligand and a dlg directory',
+          '\nUSAGE : DLGdf three_letter_code dlg_directory',
+          '\nExample : DLGdf GLU docking_result')
+    sys.exit(1)
     
 ## print header of table
 print('dlg file', 'Ligand', 
