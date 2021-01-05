@@ -110,8 +110,6 @@ def reverse_docking(pdb):
         autodock(pdb_name+'_'+lig_name+'_%s.dpf' % i, pdb_name+'_'+lig_name+'_%s.dlg' % i)
 
 ####    multiprocessing    ####
-if __name__ == '__main__':
-    pool = Pool(int(processes))                       # Create a multiprocessing Pool
-    pool.map(reverse_docking,coordinates)  # process data_inputs iterable with pool
+Pool(int(processes)).map(reverse_docking,coordinates)  
     
 
