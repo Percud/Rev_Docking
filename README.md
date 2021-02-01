@@ -8,7 +8,7 @@ Coinceived for a High Performance Computer (HPC) cluster
 
 ### Prerequisites
 
-AutoDock, AutoGrid >=4.2.6
+`AutoDock, AutoGrid >=4.2.6`
 
 Mgltools >=1.5.6
 
