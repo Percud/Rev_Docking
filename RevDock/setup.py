@@ -20,7 +20,7 @@ setuptools.setup(
     install_requires=[
         'requests>=2.24.0',
         'pandas>=1.0.5',
-        'numpy>=1.18.5',
+        'numpy<1.20',
         'wget>=3.2',
         'Bio>=0.2.4',
     ],
