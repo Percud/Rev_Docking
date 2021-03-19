@@ -16,7 +16,7 @@ setuptools.setup(
         "Development Status :: 4 - Beta",
         "Topic :: Scientific/Engineering :: Bio-Informatics",
     ],
-    python_requires='>=3.6',
+    python_requires='==3.8',
     install_requires=[
         'requests>=2.24.0',
         'pandas>=1.0.5',
