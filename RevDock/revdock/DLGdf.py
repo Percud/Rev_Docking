@@ -81,8 +81,8 @@ for dlg in glob.glob('*.dlg'):
               mean_best, mean_largest,
               mean_best_res, mean_largest_res,
               largest_cluster, largest_cluster_num, ratio_num_LC,
-              sep = '\t', file=open(dlg_dir+dlg_dir.split('/')[-2]+'.tsv', 'a'))
+              sep = '\t', file=open(dlg_dir + '/' + os.path.basename(dlg_dir) + '.tsv', 'a'))
     except:
-        print(os.path.basename(dlg), sep = '\t', file=open(dlg_dir+'.tsv', 'a'))
+        print(os.path.basename(dlg), sep = '\t', file=open(dlg_dir + '/' + os.path.basename(dlg_dir) + '.tsv', 'a'))
 
 os.chdir(cwd)
