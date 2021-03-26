@@ -34,7 +34,7 @@ print('dlg file', 'Ligand',
       'BCaaB (kcal/mol)', 'Run', 'LCaaB (kcal/mol)', 'Run', 
       'BCM (kcal/mol)', 'LCM (kcal/mol)', 
       'BCaaM (kcal/mol)', 'LCaaM (kcal/mol)',
-      'LC', 'Num in LC', '1LC/2LC %', 'Distance (A)'
+      'LC', 'Num in LC', '1LC/2LC %', 'Distance (A)',
       sep = '\t',
       file=open(dlg_dir+'.tsv', 'w')) # tab headers
 
