@@ -3,6 +3,13 @@
 
 import glob, re, sys, os, pandas as pd
 
+def distance(a,b):
+    '''Return max distance given arrays in xyz of points'''
+    x = [a[0], b[0]]
+    y = [a[1], b[1]]
+    z = [a[2], b[2]]
+    return (((max(x)-min(x))**2+(max(y)-min(y))**2+(max(z)-min(z))**2)**0.5)
+
 try:
     RES = str(sys.argv[1]) ## three-letter code of selected ligand atom
     dlg_dir = sys.argv[2]  ## DLGs directory
@@ -15,6 +22,7 @@ USAGE : DLGdf three_letter_code dlg_directory
 Example : DLGdf GLU docking_result
 ''')
     sys.exit(1)
+
     
 cwd = os.getcwd()
 os.chdir(dlg_dir)
@@ -26,20 +34,25 @@ print('dlg file', 'Ligand',
       'BCaaB (kcal/mol)', 'Run', 'LCaaB (kcal/mol)', 'Run', 
       'BCM (kcal/mol)', 'LCM (kcal/mol)', 
       'BCaaM (kcal/mol)', 'LCaaM (kcal/mol)',
-      'LC', 'Num in LC', '1LC/2LC %',
+      'LC', 'Num in LC', '1LC/2LC %', 'Distance (A)'
       sep = '\t',
       file=open(dlg_dir+'.tsv', 'w')) # tab headers
 
 for dlg in glob.glob('*.dlg'):
     try:
         tab, dock = [], {}
+        model_dict = {}
         for line in open(dlg):
             if line.startswith('DOCKED: MODEL'): # number of run
                 model = int(line.split()[-1])
+            elif 'Coordinates of Central Grid Point of Maps' in line:
+                center = eval(re.search(r"\(.*\)", line).group())
             elif line.startswith('DOCKED: ATOM'): # coordinates and energies of run
                 number, atom, res, chain, x, y, z, vdw, Elec = line.split()[2:11]
                 if res == RES:  # only RES atom are considered
-                    dock.setdefault(model, []).append((float(vdw)+float(Elec))) 
+                    dock.setdefault(model, []).append((float(vdw) + float(Elec)))
+                if number == '2':
+                    model_dict.setdefault(model, distance(center,tuple(map(float,(x,y,z)))))
             elif 'RANKING' in line: # parsing rmsd table
                 tab.append(list(map(float,line.split()[:4])))
 
@@ -80,9 +93,11 @@ for dlg in glob.glob('*.dlg'):
               *best_res, *largest_res, 
               mean_best, mean_largest,
               mean_best_res, mean_largest_res,
-              largest_cluster, largest_cluster_num, ratio_num_LC,
-              sep = '\t', file=open(dlg_dir + '/' + os.path.basename(dlg_dir) + '.tsv', 'a'))
+              largest_cluster, largest_cluster_num, ratio_num_LC, model_dict.get(largest_energy[1]),
+              sep = '\t', 
+              file=open(dlg_dir + '.tsv', 'a')
+             )
     except:
-        print(os.path.basename(dlg), sep = '\t', file=open(dlg_dir + '/' + os.path.basename(dlg_dir) + '.tsv', 'a'))
+        print(os.path.basename(dlg), sep = '\t', file=open(dlg_dir + '.tsv', 'a'))
 
 os.chdir(cwd)
