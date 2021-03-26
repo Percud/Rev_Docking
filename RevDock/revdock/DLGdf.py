@@ -95,7 +95,7 @@ for dlg in glob.glob('*.dlg'):
               mean_best_res, mean_largest_res,
               largest_cluster, largest_cluster_num, ratio_num_LC, model_dict.get(largest_energy[1]),
               sep = '\t', 
-              file=open(dlg_dir + '.tsv', 'a')
+              file=open(dlg_dir + '.tsv', 'a'),
              )
     except:
         print(os.path.basename(dlg), sep = '\t', file=open(dlg_dir + '.tsv', 'a'))
