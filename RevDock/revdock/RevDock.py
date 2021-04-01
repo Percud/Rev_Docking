@@ -151,7 +151,7 @@ def reverse_docking(pdb):
         print(f'{pdb} not found')
         
 ####    multiprocessing    ####
-
-Pool(int(processes)).map(reverse_docking,coordinates)
+def main():
+    Pool(int(processes)).map(reverse_docking,coordinates)
     
 
