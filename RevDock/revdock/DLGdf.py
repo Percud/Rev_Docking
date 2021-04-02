@@ -20,7 +20,7 @@ parser = argparse.ArgumentParser(prog = 'DLGdf',
 parser.add_argument('-i', '--input',
                     nargs = '+',
                     required = True,
-                    help = 'Define FASTA input, gapped or not')
+                    help = 'Define DLG input file')
 parser.add_argument('-r', '--residue',
                     help = 'Define residue three-letter code to compute energy separately')
 parser.add_argument('-d', '--distance',
