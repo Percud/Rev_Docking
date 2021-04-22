@@ -114,7 +114,7 @@ for dlg in args.input:
         largest_cluster = df['subrank'].idxmax()[0]
         largest_cluster_num = df['subrank'].max()
         try:
-            second_largest_cluster_num = pd.DataFrame(bo.count().sort_values('subrank',ascending=False)).loc[2,'subrank']
+            second_largest_cluster_num = pd.DataFrame(bo.count().sort_values('subrank',ascending=False)).iloc[2].loc['subrank']
         except:
             second_largest_cluster_num = 0
         ratio_num_LC=round((1-(second_largest_cluster_num/largest_cluster_num))*100,2)
