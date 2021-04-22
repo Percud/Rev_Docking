@@ -113,6 +113,8 @@ for dlg in args.input:
                     df['vdw+Elec'].idxmin()[1])
         largest_cluster = df['subrank'].idxmax()[0]
         largest_cluster_num = df['subrank'].max()
+        largest_cluster_runs = df.loc[df['subrank'].idxmax()[0]].index.tolist()
+
         try:
             second_largest_cluster_num = pd.DataFrame(bo.count().sort_values('subrank',ascending=False)).iloc[2].loc['subrank']
         except:
@@ -123,7 +125,8 @@ for dlg in args.input:
               *best_res, *largest_res, 
               mean_best, mean_largest,
               mean_best_res, mean_largest_res,
-              largest_cluster, largest_cluster_num, ratio_num_LC, model_dict.get(largest_energy[1]), sum(oh.get(largest_energy[1])),
+              largest_cluster, largest_cluster_num, ratio_num_LC, model_dict.get(largest_energy[1]), 
+              sum([sum(oh.get(i)) for i in largest_cluster_runs])/len(largest_cluster_runs),
               sep = '\t', 
               file=open(args.output, 'a'),
              )
