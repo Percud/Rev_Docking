@@ -1,8 +1,8 @@
 ####    make table from dlg directory with different kind of energy    #### 
 ####    USAGE: ./get_atom_energy.py MY_RES_IN_LIGAND MY_DLG_DIRECTORY
 
-import glob, re, sys, os, pandas as pd, argparse
-from pymol import cmd
+import glob, re, sys, os, math, pandas as pd, argparse
+from Bio.PDB.vectors import *
 from biopandas.pdb import PandasPdb
 
 def distance(a,b):
@@ -42,20 +42,23 @@ args = parser.parse_args()
 dlg_dir = os.path.dirname(os.path.abspath(args.input[0]))  ## DLGs directory    
 
 ## print header of table
+
 print('dlg file', 'Ligand', 
       'BCB (kcal/mol)', 'Run', 'LCB (kcal/mol)', 'Run', 
       'BCaaB (kcal/mol)', 'Run', 'LCaaB (kcal/mol)', 'Run', 
-      'BCM (kcal/mol)', 'LCM (kcal/mol)', 
-      'BCaaM (kcal/mol)', 'LCaaM (kcal/mol)',
-      'LC', 'Num in LC', '1LC/2LC %', 'Distance (A)',
-      'Catalytic Energy', 'Dihedral', 'Catalytic Residues',
+      'BCM (kcal/mol)', 'Runs', 'LCM (kcal/mol)', 'Runs', 
+      'BCaaM (kcal/mol)', 'Runs', 'LCaaM (kcal/mol)', 'Runs', 
+      'LC', 'Num in LC', '1LC/2LC %', 
+      'Distance (A)', 'Dihedral',
+      'Catalytic Residue', 'Catalytic Residue Occurrence', 'Catalytic LC',
       sep = '\t',
       file=open(f"{dlg_dir}/{os.path.basename(dlg_dir)}.tsv", 'w')) # tab headers
 
 for dlg in args.input:
     try:
-        tab, around = [], []
-        dock, model_dict, oh, angle, cat = {}, {}, {}, {}, {} 
+        tab, around, count = [], [], []
+        dock, angle, cat = {}, {}, {}
+        model_dict = {}
         for line in open(dlg):
             if line.startswith('DOCKED: MODEL'): # number of run
                 model = int(line.split()[-1])
@@ -67,8 +70,8 @@ for dlg in args.input:
                 center = eval(re.search(r"\(.*\)", line).group())
 
             elif line.startswith('DOCKED: ATOM'): # coordinates and energies of run
-                number, atom, res, chain, x, y, z, vdw, Elec = line.split()[2:11]
-                
+                number, atom, res, chain, x, y, z, vdw, Elec = line.replace('-', ' -').split()[2:11]
+
                 ###  only args.residue atoms are considered
                 if args.residue:
                     if res == args.residue:
@@ -81,110 +84,142 @@ for dlg in args.input:
                     if number == str(args.distance):
                         model_dict.setdefault(model, distance(center,tuple(map(float,(x,y,z)))))
                 else:
-                    model_dict.setdefault(model, 0)
+                    model_dict.setdefault([model, 0])
 
                 ###  only args.angle atom is considered   
                 if args.angle:
                     if number in args.angle:
-                        angle.setdefault(model, abs(cmd.get_dihedral('1','2','3','4')))
+                        angle.setdefault(model, []).append(list(map(float,(x,y,z))))
                 else:
                     angle.setdefault(model, 0)                
 
                 ###  only args.catalytic atoms are considered    
                 if args.catalytic:
                     if number in args.catalytic:
-                        cat.setdefault(model, []).append((float(vdw) + float(Elec)))
+                        cat.setdefault(model, []).append(tuple(map(float,(x,y,z))))
                 else:
                     cat.setdefault(model, [0])
-
-                ###  only args.prova atoms are considered    
-                if args.catalytic:
-                    if number in args.catalytic:
-                        oh.setdefault(model, []).append(tuple(map(float,(x,y,z))))
-                else:
-                    oh.setdefault(model, [0])
 
             elif 'RANKING' in line: # parsing rmsd table
                 tab.append(list(map(float,line.split()[:4])))
 
         df_dock = pd.DataFrame.from_dict(dock, orient='index')
         df_dock['vdw+Elec'] = df_dock.sum(axis=1) # sum of non binding energy for each run
-
-        df = pd.DataFrame(tab, columns = ['rank', 'subrank', 'run', 'energy'], dtype = int)
-        df.set_index(['rank','run'], inplace = True)
-        df = df.join(df_dock['vdw+Elec'], on='run').round(2)
-        bo = df.groupby('rank')
-        bo.idxmin().at[1,'vdw+Elec'][1]
-        largest_runs = df.loc[df['subrank'].idxmax()[0]].index.tolist()
-        best_energy = (df.loc[1].iloc[0]['energy'], 
-                       df.loc[1]['energy'].idxmin())
-        largest_energy = (df.loc[df['subrank'].idxmax()[0]].iloc[0]['energy'], 
-                          df.loc[df['subrank'].idxmax()[0]]['energy'].idxmin())
-        best_res = (df.loc[1].iloc[0]['vdw+Elec'], 
-                    df.loc[1]['subrank'].idxmin())
-        largest_res = (df.loc[df['subrank'].idxmax()[0]].iloc[0]['vdw+Elec'], 
-                       df.loc[df['subrank'].idxmax()[0]]['subrank'].idxmin())
-        mean_largest = round(df.loc[df['subrank'].idxmax()[0]]['energy'].mean(),2)
-        mean_best = round(df['energy'][1].mean(),2)
-        best_largest_res = (df.loc[df['subrank'].idxmax()[0]]['vdw+Elec'].min(), 
-                            df.loc[df['subrank'].idxmax()[0]]['vdw+Elec'].idxmin())
-        mean_largest_res = round(df.loc[df['subrank'].idxmax()[0]]['vdw+Elec'].mean(),2)
-        mean_best_res = round(df['vdw+Elec'][1].mean(),2)
-        avg = round(df['vdw+Elec'].mean(),2)
-        bestbest = (df['vdw+Elec'].min(), 
-                    df['vdw+Elec'].idxmin()[1])
-        largest_cluster = df['subrank'].idxmax()[0]
-        largest_cluster_num = df['subrank'].max()
-        largest_cluster_runs = df.loc[df['subrank'].idxmax()[0]].index.tolist()
         try:
-            second_largest_cluster_num = pd.DataFrame(bo.count().sort_values('subrank',ascending=False)).iloc[1].loc['subrank']
-        except:
-            second_largest_cluster_num = 0
+            df_dist = pd.DataFrame.from_dict(model_dict, orient='index', columns = ['Distance']) # distance from coordinates (e.g. C1)
+            df_cat = pd.DataFrame.from_dict(cat, orient='index', columns = args.catalytic) # coordinates of catalytic competence atoms
+            df_angle = pd.DataFrame.from_dict(angle, orient='index', columns = args.angle) # coordinates for dihedral
 
+            df_angle['dihedral'] = df_angle.apply(lambda v : abs(math.sin(calc_dihedral(Vector(v[0]), # coomputing sin(dihedral) from coordinates
+                                                                      Vector(v[1]),
+                                                                      Vector(v[2]),
+                                                                      Vector(v[3])))), axis = 1)
+
+            dfs = pd.concat([df_dock['vdw+Elec'], df_dist, df_cat, df_angle['dihedral']], axis=1) # concatenate dataframes
+        except:
+            dfs = pd.DataFrame(df_dock['vdw+Elec'])
+
+        tab = pd.DataFrame(tab, columns = ['rank', 'subrank', 'run', 'energy']) # dataframe of HISTOGRAM in dlg 
+        tab.set_index('run', inplace = True)
+
+        df = pd.merge(tab, dfs, left_index=True, right_index = True)  # build total dataframe
+
+        ### LARGEST CLUSTER ENERGY
+        LC_sorted = df.groupby('rank').count().sort_values('subrank', ascending = False)['subrank'].index.astype(int).tolist()
+        LC = df.groupby('rank').count()['subrank'].idxmax().astype(int)
+        runs_in_LC = df.groupby('rank').count()['subrank'][LC_sorted[0]]
+        LC_energies = (df[df['rank'] == LC_sorted[0]]['energy'],
+                       df[df['rank'] == LC_sorted[0]]['vdw+Elec'])
+        LCB = (LC_energies[0].min(), LC_energies[0].idxmin())
+        LCM = (LC_energies[0].mean(), LC_energies[0].index.tolist())
+        LCaaB = (LC_energies[1].min(), LC_energies[1].idxmin())
+        LCaaM = (LC_energies[1].mean(), LC_energies[1].index.tolist())
+
+        ### BEST CLUSTER ENERGY
+        BC_sorted = df['rank'].drop_duplicates().astype(int).tolist()
+        BC_energies = (df[df['rank'] == BC_sorted[0]]['energy'],
+                       df[df['rank'] == BC_sorted[0]]['vdw+Elec'])
+        BCB = (BC_energies[0].min(), BC_energies[0].idxmin())
+        BCM = (BC_energies[0].mean(), BC_energies[0].index.tolist())
+        BCaaB = (BC_energies[1].min(), BC_energies[1].idxmin())
+        BCaaM = (BC_energies[1].mean(), BC_energies[1].index.tolist())
+
+        try:
+            runs_in_second_LC = df.groupby('rank').count()['subrank'][LC_sorted[1]]
+        except:
+            runs_in_second_LC = 0
+
+        ratio_LC = round((1-(runs_in_second_LC/runs_in_LC))*100,2)
 
         try: ##try to open pdbqt
-            pdb=PandasPdb().read_pdb(f"{dlg_dir}/{pdbqt}") # open pdb with biopandas
+            pdb = PandasPdb().read_pdb(f"{dlg_dir}/{pdbqt}") # open pdb with biopandas
         except: ##if pdb is present
             print('Please re-install biopandas from\nconda install -c conda-forge biopandas')
-            
-            
-    ####  CATALYTIC COMPETENCE  ####
-        if args.catalytic:
-            for c in list({k: v for k, v in oh.items() if k in largest_runs}.values()):
-                around_int = []
-                for center in c:
-                    distances = pdb.distance(xyz=center, records=('ATOM'))
-                    site=pdb.df['ATOM'][pdb.distance(xyz=center, records=('ATOM',)) < 3].astype(str) # threshold of 3 A 
-                    around_int.append(site[(site['residue_name'].isin(['HIS',
-                                                              'ASP',
-                                                              'GLU',
-                                                              'TYR'
-                                                             ])) & 
-                                  (site['atom_name'].isin(['OH', 
-                                                           'ND1', 'NE2', 
-                                                           'OE1', 'OE2',
-                                                           'OD1', 'OD2',
-                                                          ]))
-                                 ][['record_name','residue_name','residue_number', 'atom_name']]
-                                 )
-                try:
-                    around.append(pd.concat(around_int).drop_duplicates(['residue_name', 'residue_number']))
-                except:
-                    pass
-            try:
-                cc = pd.concat(around).groupby(['residue_name','residue_number', 'atom_name']).count().apply(list)
-                cc = list(zip(cc.index.tolist(), cc.record_name.tolist()))
-            except:
-                cc = None
 
-        ratio_num_LC=round((1-(second_largest_cluster_num/largest_cluster_num))*100,2)
+        ### CATAYTIC COMPETENCE
+        cat_comp = df[(df['dihedral'] >= 0.9)
+              & (df['Distance'] <= 5)
+              & (df['rank'] == LC) 
+             ] # filter by catalyitic competences
+
+        if args.catalytic:
+            for k, c in cat.items():
+                if k in cat_comp.index.tolist():
+                    around_int = []
+                    for center in c:
+                        distances = pdb.distance(xyz=center, records=('ATOM'))
+                        site = pdb.df['ATOM'][pdb.distance(xyz=center, records=('ATOM',)) <= 4].astype(str) # threshold of 3.5 A 
+                        site['distances'] = distances
+                        site['run'] = [k]*len(site)
+                        site = site.sort_values('distances')        
+
+                        intorno = site[(site['residue_name'].isin(['HIS',
+                                                                  'ASP',
+                                                                  'GLU',
+                                                                  'TYR'
+                                                                 ])) & 
+                                      (site['atom_name'].isin(['OH', 
+                                                               'ND1', 'NE2', 
+                                                               'OE1', 'OE2',
+                                                               'OD1', 'OD2',
+                                                              ]))
+                                     ][['run','record_name','residue_name','residue_number', 'atom_name', 'distances']]
+
+                        around_int.append(intorno)
+                    try:
+                        around.append(pd.concat(around_int).drop_duplicates(['residue_name', 'residue_number']))
+                        count.append(pd.concat(around_int).drop_duplicates('record_name'))
+                    except:
+                        pass
+            try:
+                cc = (pd.concat(around)
+                      .groupby(['residue_name','residue_number', 'atom_name'])
+                      .count()
+                      .apply(list)
+                      .sort_values('run', ascending = False))
+
+                count = pd.concat(count).set_index('run')
+                frequent_atom = ' '.join(list(zip(cc.index.tolist(), cc.record_name.tolist()))[0][0])
+                frequent_atom_num = list(zip(cc.index.tolist(), cc.record_name.tolist()))[0][1]
+            except:
+                frequent_atom, frequent_atom_num = None, None
+                count = pd.DataFrame([])
+
+            ### CATAYTIC COMPETENCE
+            cat_comp = cat_comp.merge(count, right_index = True, left_index = True, how = 'inner')
+            cat_comp_num = len(cat_comp) ## number of catalytic runs in largest cluster
+
+        else:
+            frequent_atom, frequent_atom_num, cat_comp_num = 'None', 'None', 'None'
+
         print(os.path.basename(dlg), args.residue, 
-              *best_energy, *largest_energy, 
-              *best_res, *largest_res, 
-              mean_best, mean_largest,
-              mean_best_res, mean_largest_res,
-              largest_cluster, largest_cluster_num, ratio_num_LC, model_dict.get(largest_energy[1]), 
-              sum([sum(cat.get(i)) for i in largest_cluster_runs])/len(largest_cluster_runs), angle.get(largest_energy[1]), cc,
+              *BCB, *LCB, 
+              *BCaaB, *LCaaB,
+              *BCM, *LCM, 
+              *BCaaM, *LCaaM,
+              LC, runs_in_LC, ratio_LC, 
+              df[df['rank'] == LC].mean().Distance, df[df['rank'] == LC].mean().dihedral,
+              frequent_atom, frequent_atom_num, cat_comp_num,
               sep = '\t', 
               file=open(f"{dlg_dir}/{os.path.basename(dlg_dir)}.tsv", 'a'),
              )
