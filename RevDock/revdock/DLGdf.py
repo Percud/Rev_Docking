@@ -201,16 +201,18 @@ for dlg in args.input:
                 count = pd.concat(count).set_index('run')
                 frequent_atom = ' '.join(list(zip(cc.index.tolist(), cc.record_name.tolist()))[0][0])
                 frequent_atom_num = list(zip(cc.index.tolist(), cc.record_name.tolist()))[0][1]
+                cat_comp = cat_comp.merge(count, right_index = True, left_index = True, how = 'inner')
+
             except:
                 frequent_atom, frequent_atom_num = None, None
                 count = pd.DataFrame([])
 
-            ### CATAYTIC COMPETENCE
-            cat_comp = cat_comp.merge(count, right_index = True, left_index = True, how = 'inner')
-            cat_comp_num = len(cat_comp) ## number of catalytic runs in largest cluster
-
         else:
-            frequent_atom, frequent_atom_num, cat_comp_num = 'None', 'None', 'None'
+            frequent_atom, frequent_atom_num= 'None', 'None'
+
+        ### CATAYTIC COMPETENCE
+        cat_comp_num = len(cat_comp) ## number of catalytic runs in largest cluster
+
 
         print(os.path.basename(dlg), args.residue, 
               *BCB, *LCB, 
