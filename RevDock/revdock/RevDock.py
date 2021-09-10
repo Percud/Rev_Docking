@@ -14,26 +14,20 @@ except:
 '''
 rd_conf.txt is required as argument, please provide it.
 USAGE : rev_docking.py rd_conf.txt
-
 Example from RevDock/modules/tests/rd_conf.txt:
-
 [DOCKING]
 ### Configuration file for the reverse docking procedure ###
 ### change file names according with your paths ####
-
 # MGL_ROOT environmental variable - path to mgltools   
 MGL_ROOT = /home/marco/MGLTools-1.5.6
-
 # Specific input/output files
 ligand = ./Docking_data/HTML_PLP.pdbqt            # ligand file
 receptor_dir = ./Mouse/pdb                        # path to receptor pdb files
 coord_file = ./Mouse/Mouse_Orf_pred_mini.coord          # table of gridcenter:  receptor_name1 x y z
 outdir = ./Mouse/outdir_HTML_PLP                  # directory of results (if exist, add progressive number)
 processes=5                                       # number of processes of multiprocessing
-
 [GPF]
 npts=55,55,55 
-
 [DPF]
 ga_pop_size=200
 ga_num_evals=1000000
@@ -49,7 +43,8 @@ u24 = MGL_ROOT+'/MGLToolsPckgs/AutoDockTools/Utilities24/'
 
 def prepare_receptor(inf,outf):
     subprocess.run([pythonsh,u24+'prepare_receptor4.py',
-                    '-A "checkhydrogens" -e',
+                    '-A checkhydrogens',
+                    '-e',
                     '-r',inf,
                     '-o',outf])
     
@@ -153,5 +148,3 @@ def reverse_docking(pdb):
 ####    multiprocessing    ####
 def main():
     Pool(int(processes)).map(reverse_docking,coordinates)
-    
-
