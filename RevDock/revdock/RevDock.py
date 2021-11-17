@@ -94,16 +94,29 @@ if os.path.exists(outdir+'_%s' % i):
 ####    read coordinates    ####
 
 try:
-    coordinates = (pd.read_csv(coord_file,sep='\t').dropna().groupby('pdb')
-                       .apply(lambda r: r[['x','y','z']].values.tolist())
-                       .to_dict())
-    print('Reading '+coord_file+' ...')
+    print(f'Reading {coord_file} ...')
+    
+    if eval(all_site):
+        coordinates = (pd.read_csv(coord_file, sep='\t', comment='#').dropna().groupby('pdb')
+                           .apply(lambda r: r[['x','y','z', 'lys', 'chain']].values.tolist())
+                           .to_dict())
+        print(f'Proceeding with all site docking')
+        
+    else:
+        coordinates = (pd.read_csv(coord_file, sep='\t', comment='#').dropna().sort_values('chain').drop_duplicates('pdb').groupby('pdb')
+                         .apply(lambda r: r[['x','y','z', 'res', 'chain']].values.tolist())
+                         .to_dict())
+        print(f'Proceeding with one site docking')
+        
+        
 except:
     print(coord_file+" doesn't exist")
     sys.exit(1)
 
+####   copy the ligand   ####
+
 try:
-    os.system('cp '+ligand+' '+out_dir)
+    os.system(f'cp {ligand} {out_dir}')
     lig_name = os.path.splitext(os.path.basename(ligand))[0]
 except:
     print(ligand+" doesn't exist")
