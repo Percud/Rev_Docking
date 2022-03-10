@@ -1,66 +1,66 @@
 REMARK  11 active torsions:
 REMARK  status: ('A' for Active; 'I' for Inactive)
-REMARK    1  A    between atoms: C_5  and  C_6 
-REMARK    2  A    between atoms: C_6  and  O_7 
-REMARK    3  A    between atoms: O_7  and  P_8 
-REMARK    4  A    between atoms: C_12  and  C_13 
-REMARK    5  A    between atoms: N_14  and  C_15 
-REMARK    6  A    between atoms: C_15  and  C_19 
-REMARK    7  A    between atoms: C_16  and  O_17 
-REMARK    8  A    between atoms: C_19  and  C_20 
-REMARK    9  A    between atoms: C_20  and  CA_21 
-REMARK   10  A    between atoms: CA_21  and  C_22 
-REMARK   11  A    between atoms: CA_21  and  N_23 
+REMARK    1  A    between atoms: N_1  and  C_3 
+REMARK    2  A    between atoms: N_2  and  C_6 
+REMARK    3  A    between atoms: C_3  and  C_4 
+REMARK    4  A    between atoms: C_3  and  C_7 
+REMARK    5  A    between atoms: C_4  and  C_5 
+REMARK    6  A    between atoms: C_5  and  C_6 
+REMARK    7  A    between atoms: C_16  and  C_17 
+REMARK    8  A    between atoms: C_17  and  O_21 
+REMARK    9  A    between atoms: C_18  and  C_19 
+REMARK   10  A    between atoms: C_20  and  O_25 
+REMARK   11  A    between atoms: O_21  and  P_26 
 ROOT
-ATOM      1  C   PLP A           3.049   4.448   1.375  0.00  0.00     0.070 C 
-ATOM      2  C   PLP A           2.872   2.993   1.063  0.00  0.00     0.068 A 
-ATOM      3  N   PLP A           3.894   2.147   1.334  0.00  0.00    -0.259 NA
-ATOM      4  C   PLP A           3.818   0.821   1.090  0.00  0.00     0.118 A 
-ATOM      5  C   PLP A           2.662   0.245   0.540  0.00  0.00     0.008 A 
-ATOM      6  C   PLP A           1.545   1.106   0.242  0.00  0.00     0.031 A 
-ATOM      7  C   PLP A           1.675   2.492   0.508  0.00  0.00     0.102 A 
+ATOM      1  N   PLP d   2       4.208   2.510   1.641  0.00  0.00    -0.262 NA
+ATOM      2  C   PLP d   2       2.794   4.503   1.348  0.00  0.00     0.073 C 
+ATOM      3  C   PLP d   2       2.998   3.018   1.303  0.00  0.00     0.064 A 
+ATOM      4  C   PLP d   2       4.470   1.186   1.605  0.00  0.00     0.127 A 
+ATOM      5  C   PLP d   2       3.494   0.267   1.200  0.00  0.00    -0.002 A 
+ATOM      6  C   PLP d   2       2.210   0.754   0.804  0.00  0.00     0.026 A 
+ATOM      7  C   PLP d   2       1.964   2.164   0.886  0.00  0.00     0.102 A 
 ENDROOT
 BRANCH   6   8
-ATOM      8  C   PLP A           0.235   0.642  -0.326  0.00  0.00     0.116 C 
-ATOM      9  N   ORN A           0.016  -0.594  -0.570  0.00  0.00    -0.292 NA
+ATOM      8  C   PLP d   2       1.239  -0.201   0.191  0.00  0.00     0.126 C 
+ATOM      9  N   ORN d   1       0.156   0.199  -0.365  0.00  0.00    -0.285 NA
 BRANCH   9  10
-ATOM     10  C   ORN A          -1.210  -1.126  -1.108  0.00  0.00     0.146 C 
+ATOM     10  C   ORN d   1      -0.597  -0.630  -1.274  0.00  0.00     0.208 C 
 BRANCH  10  11
-ATOM     11  C   ORN A          -1.731  -2.220  -0.161  0.00  0.00     0.053 C 
+ATOM     11  C   ORN d   1      -1.984  -0.938  -0.676  0.00  0.00     0.040 C 
 BRANCH  11  12
-ATOM     12  C   ORN A          -2.740  -3.147  -0.860  0.00  0.00     0.007 C 
+ATOM     12  C   ORN d   1      -2.772  -2.015  -1.445  0.00  0.00     0.030 C 
 BRANCH  12  13
-ATOM     13  CA  ORN A          -2.265  -4.595  -1.183  0.00  0.00     0.125 C 
+ATOM     13  C   ORN d   1      -2.089  -3.395  -1.498  0.00  0.00     0.230 C 
 BRANCH  13  14
-ATOM     14  C   ORN A          -0.973  -4.730  -1.974  0.00  0.00     0.092 C 
-ATOM     15  O   ORN A          -0.556  -5.953  -2.353  0.00  0.00    -0.544 OA
-ATOM     16  OXT ORN A          -0.293  -3.761  -2.259  0.00  0.00    -0.544 OA
+ATOM     14  N   ORN d   1      -1.925  -4.007  -0.178  0.00  0.00    -0.079 N 
+ATOM     15  H   ORN d   1      -1.327  -3.416   0.399  0.00  0.00     0.274 HD
+ATOM     16  H   ORN d   1      -1.497  -4.927  -0.280  0.00  0.00     0.274 HD
+ATOM     17  H   ORN d   1      -2.838  -4.105   0.267  0.00  0.00     0.274 HD
 ENDBRANCH  13  14
-BRANCH  13  17
-ATOM     17  N   ORN A          -2.171  -5.382   0.053  0.00  0.00     0.241 N 
-ATOM     18  H1  ORN A          -1.425  -5.011   0.685  0.00  0.00     0.197 HD
-ATOM     19  H2  ORN A          -1.953  -6.380  -0.173  0.00  0.00     0.197 HD
-ATOM     20  H3  ORN A          -3.089  -5.362   0.554  0.00  0.00     0.197 HD
-ENDBRANCH  13  17
 ENDBRANCH  12  13
 ENDBRANCH  11  12
 ENDBRANCH  10  11
+BRANCH  10  18
+ATOM     18  C   ORN d   1      -0.585   0.134  -2.575  0.00  0.00     0.198 C 
+ATOM     19  O   ORN d   1      -1.615   0.488  -3.127  0.00  0.00    -0.646 OA
+ATOM     20  OXT ORN d   3       0.617   0.526  -3.063  0.00  0.00    -0.646 OA
+ENDBRANCH  10  18
 ENDBRANCH   9  10
 ENDBRANCH   6   8
 BRANCH   5  21
-ATOM     21  C   PLP A           2.730  -1.261   0.329  0.00  0.00     0.203 C 
+ATOM     21  C   PLP d   2       3.910  -1.194   1.197  0.00  0.00     0.223 C 
 BRANCH  21  22
-ATOM     22  O   PLP A           3.807  -1.546  -0.538  0.00  0.00    -0.350 OA
+ATOM     22  O   PLP d   2       4.813  -1.408   0.138  0.00  0.00    -0.278 OA
 BRANCH  22  23
-ATOM     23  P   PLP A           4.526  -3.076  -0.082  0.00  0.00     0.060 P 
-ATOM     24  O   PLP A           3.408  -4.154  -0.061  0.00  0.00    -0.634 OA
-ATOM     25  O   PLP A           5.696  -3.589  -1.256  0.00  0.00    -0.634 OA
-ATOM     26  O   PLP A           5.231  -3.010   1.503  0.00  0.00    -0.634 OA
+ATOM     23  P   PLP d   2       5.127  -3.126   0.010  0.00  0.00     0.422 P 
+ATOM     24  O   PLP d   2       3.794  -3.846  -0.332  0.00  0.00    -0.617 OA
+ATOM     25  O   PLP d   2       6.216  -3.455  -1.301  0.00  0.00    -0.617 OA
+ATOM     26  O   PLP d   2       5.729  -3.793   1.494  0.00  0.00    -0.617 OA
 ENDBRANCH  22  23
 ENDBRANCH  21  22
 ENDBRANCH   5  21
 BRANCH   7  27
-ATOM     27  O   PLP A           0.642   3.325   0.231  0.00  0.00    -0.358 OA
-ATOM     28  H   PLP A           0.669   4.278   0.384  0.00  0.00     0.218 HD
+ATOM     27  O   PLP d   2       0.788   2.760   0.562  0.00  0.00    -0.358 OA
+ATOM     28  H   PLP d   2       0.696   3.689   0.639  0.00  0.00     0.217 HD
 ENDBRANCH   7  27
 TORSDOF 11
