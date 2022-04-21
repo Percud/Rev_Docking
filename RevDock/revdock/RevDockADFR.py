@@ -35,7 +35,7 @@ processes = 60                                                  #               
 outdir = ./HTML_PLP_Mouse_flex                  # directory of results
 [GPF]
 npts=25 25 25  ## unit in Ångström
-spacing=0.2
+spacing=0.2    ## unit in Ångström
 
 [DPF]
 ga_num_evals=50000000  # number of energy evaluations
